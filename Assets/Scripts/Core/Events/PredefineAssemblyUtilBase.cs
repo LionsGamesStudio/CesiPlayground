@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Assets.Scripts.Core.Events
@@ -65,8 +66,15 @@ namespace Assets.Scripts.Core.Events
                 }
             }
 
-            AddTypesFromAssembly(assemblyTypes[AssemblyType.AssemblyCSharp], types, interfaceType);
-            AddTypesFromAssembly(assemblyTypes[AssemblyType.AssemblyCSharpFirstPass], types, interfaceType);
+            try
+            {
+                AddTypesFromAssembly(assemblyTypes[AssemblyType.AssemblyCSharp], types, interfaceType);
+                AddTypesFromAssembly(assemblyTypes[AssemblyType.AssemblyCSharpFirstPass], types, interfaceType);
+            }
+            catch (KeyNotFoundException e)
+            {
+                UnityEngine.Debug.LogWarning("Assembly not found : " + e.Message);
+            }
 
             return types;
         }

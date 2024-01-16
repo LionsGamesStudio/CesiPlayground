@@ -50,6 +50,7 @@ namespace Assets.Scripts.Core.Events
         /// </summary>
         public static void ClearAllBuses()
         {
+            if (EventBusTypes == null) return;
             foreach (var busType in EventBusTypes)
             {
                 var clearMethod = busType.GetMethod("Clear", BindingFlags.Static | BindingFlags.NonPublic);

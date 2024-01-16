@@ -26,17 +26,17 @@
   },
   {
     "Pos": 2,
+    "PlayerName": "flo",
+    "Score": 400
+  },
+  {
+    "Pos": 1,
     "PlayerName": null,
     "Score": 520
   },
   {
-    "Pos": 1,
+    "Pos": 0,
     "PlayerName": "vincent",
     "Score": 550
-  },
-  {
-    "Pos": 0,
-    "PlayerName": "flo",
-    "Score": 570
   }
 ]
