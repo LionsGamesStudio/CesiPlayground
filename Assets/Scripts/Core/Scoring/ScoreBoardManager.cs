@@ -45,10 +45,8 @@ namespace Assets.Scripts.Core.Scoring
 
 
 
-    public class ScoreBoardManager : MonoBehaviour
+    public class ScoreBoardManager : Singleton<ScoreBoardManager>
     {
-        public static ScoreBoardManager Instance;
-
         // List of all scoreboard object
         public List<List<RowBoard>> RowBoards = new List<List<RowBoard>>();
         public GameObject RowBoardPrefab;
@@ -78,11 +76,6 @@ namespace Assets.Scripts.Core.Scoring
         public Transform ContentInUse
         {
             get; set;
-        }
-
-        private void Awake()
-        {
-            Instance = this;
         }
 
         // Start is called before the first frame update

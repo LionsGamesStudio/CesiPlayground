@@ -7,7 +7,6 @@ namespace Assets.Scripts.Core
         protected static T _instance;
         public static bool HasInstance => _instance != null;
         public static T TryGetInstance() => HasInstance ? _instance : null;
-        public static T Current => _instance;
 
         private static bool _isAutoCreated = false;
 

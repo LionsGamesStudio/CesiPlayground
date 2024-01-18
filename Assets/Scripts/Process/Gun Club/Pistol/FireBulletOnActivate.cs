@@ -38,7 +38,7 @@ namespace Assets.Scripts.Process.GunClub.Pistol
 
             spawnedBullet.tag = "Bullet";
             spawnedBullet.GetComponent<Rigidbody>().velocity = spawnPoint.forward * FireSpeed;
-            spawnedBullet.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+            spawnedBullet.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
 
             // Play the sound of the gun
             if (GetComponent<AudioSource>() != null)
