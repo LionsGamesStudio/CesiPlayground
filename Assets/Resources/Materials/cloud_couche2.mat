@@ -107,7 +107,7 @@ Material:
     - _Outline: 3.47
     - _Outline_Thickness: 0.1
     - _Parallax: 0.02
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _RimAmount: 0.716
     - _RimThreshold: 0.1
