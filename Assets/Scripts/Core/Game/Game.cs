@@ -1,58 +1,66 @@
 ﻿using Assets.Scripts.Core.Events;
-using Assets.Scripts.Core.Events.Implementation.Games;
+using Assets.Scripts.Core.Spawn.Spawners;
+using Assets.Scripts.Process.Events;
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.Core.Game
 {
     public class Game : MonoBehaviour
     {
-        private bool _startedGame;
-        private int _score;
-        private string _playerName;
+        private static int _numberOfInstance = 0;
 
-        private int _id;
-        private IGameStrategy _gameStrategy;
+        private bool _startedGame = false;
+        private int _score = 0;
+        private string _displayText = "Score : 0";
 
+        private EventBinding<OnScoreEvent> _scoreEventBinding;
+
+        [NonSerialized]
+        public string ID;
+
+        [Header("Game Settings")]
+        public DataGame Data;
+        public IGameStrategy GameStrategy;
+        public Spawner Spawner;
+        public Player CurrentPlayer;
+
+        [Header("UI")]
+        public TMP_Text ScoreText;
 
         private void Awake()
         {
+            ID = _numberOfInstance.ToString();
+            _numberOfInstance++;
             DontDestroyOnLoad(this.gameObject);
-        }
 
-        private void Start()
-        {
-            _startedGame = false;
-            _score = 0;
-            _playerName = "Unknown";
-
-            // Generate a unique seed for each game id
-            _id = System.Guid.NewGuid().GetHashCode();
+            // Events
+            _scoreEventBinding = new EventBinding<OnScoreEvent>(OnScoreEvent);
+            EventBus<OnScoreEvent>.Register(_scoreEventBinding);
         }
 
         /// <summary>
         /// Start the logic of the game which is in the strategy
         /// </summary>
-        public void StartGame()
+        public void StartGame(Player player)
         {
-            _gameStrategy.StartGame();
+            if (!_startedGame)
+            {
+                CurrentPlayer = player;
+                GameStrategy.StartGame();
+                _startedGame = true;
+
+                Debug.Log(CurrentPlayer.PlayerData.PlayerName);
+
+                Display = "Score : 0";
+            }  
         }
 
         public void ResetGame()
         {
-            _gameStrategy.ResetGame();
-        }
-
-        public void UpgradeScore(int point)
-        {
-            _score += point;
-            EventBus<ScoreEvent>.Raise(new ScoreEvent
-            {
-                score = _score,
-                playerName = _playerName,
-                gameType = GameName
-            });
-            UIManager.Instance.ScoreText.text = "Score : " + _score;
+            GameStrategy.ResetGame();
         }
 
         /// <summary>
@@ -60,16 +68,29 @@ namespace Assets.Scripts.Core.Game
         /// </summary>
         public void EndGame()
         {
-            _gameStrategy.EndGame();
+            if(_startedGame)
+            {
+                GameStrategy.EndGame();
+                _startedGame = false;
+
+                Display = "Score : 0";
+
+                OnGameFinished onGameFinished = new OnGameFinished();
+                onGameFinished.Player = CurrentPlayer;
+                onGameFinished.GameId = Data.GameId;
+                onGameFinished.Score = _score;
+
+                EventBus<OnGameFinished>.Raise(onGameFinished);
+            }
         }
 
-        /// <summary>
-        /// Launch a coroutine in parallel of the game logic
-        /// </summary>
-        /// <param name="coroutine"></param>
-        public void LaunchParallelLogic(IEnumerator coroutine)
+        private void OnScoreEvent(OnScoreEvent scoreEvent)
         {
-            StartCoroutine(coroutine);
+            if (scoreEvent.GameId == Data.GameId && scoreEvent.PlayerData.PlayerId == CurrentPlayer.PlayerData.PlayerId)
+            {
+                _score += scoreEvent.Points;
+                Display = "Score : " + _score;
+            }
         }
 
         // GETTERS AND SETTERS
@@ -85,26 +106,19 @@ namespace Assets.Scripts.Core.Game
             set { _score = value; }
         }
 
-        public string PlayerName
-        {
-            get { return _playerName; }
-            set { _playerName = value; }
-        }
-
-        public IGameStrategy GameStrategy
-        {
-            get { return _gameStrategy; }
-            set { _gameStrategy = value; }
-        }
-
-        public int Id { get => _id; }
-
         public string GameName { get; set; }
 
-
-        public void SetPlayerName()
+        public string Display
         {
-            _playerName = UIManager.Instance.NameInput.text;
+            get
+            {
+                return _displayText;
+            }
+            set
+            {
+                _displayText = value;
+                ScoreText.text = _displayText;
+            }
         }
 
     }

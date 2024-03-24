@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15223e4e0b306840b8ab4b0090a39b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RowBoards: []
+  ScoreboardsHolder: {fileID: 0}
   RowBoardPrefab: {fileID: 6546224240576360583, guid: 1c763f98c616ede41b2001cdc3f78176, type: 3}
-  Content: {fileID: 0}
-  JsonName: gun_club
+  ListOfGame:
+  - {fileID: 11400000, guid: 11b2a798d4df36f4a9a4f50dcc6826aa, type: 2}
+  StorageManager: {fileID: 0}

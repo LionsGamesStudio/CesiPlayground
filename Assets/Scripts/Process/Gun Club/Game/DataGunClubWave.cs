@@ -8,7 +8,7 @@ namespace Assets.Scripts.Process.GunClub.Game
     {
         public int NumberOfTarget;
         public float CooldownSpawn;
-        public float CooldownAlive;
+        public int CooldownAlive;
         public List<GameObject> Prefab;
 
     }

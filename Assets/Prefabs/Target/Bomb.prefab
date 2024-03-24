@@ -45,11 +45,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8501340564559270100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c474c6a8e0eba24b9d7171a0ded1f09, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f858739bac23d745a7455b051f98172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
-  _point: -20
+  game: {fileID: 0}
+  spawner: {fileID: 0}
+  score: -20
+  effectOnDestroy: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
 --- !u!65 &7042251386586705828
 BoxCollider:
   m_ObjectHideFlags: 0

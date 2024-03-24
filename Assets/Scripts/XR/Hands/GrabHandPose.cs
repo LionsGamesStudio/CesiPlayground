@@ -33,7 +33,8 @@ public class GrabHandPose : MonoBehaviour
             grabInteractable.selectEntered.AddListener(SetupPose);
             grabInteractable.selectExited.AddListener(UnSetPose);
         }
-        
+
+        if (rightHandPose == null || leftHandPose == null) return;
         rightHandPose.gameObject.SetActive(false);
         leftHandPose.gameObject.SetActive(false);
     }
@@ -44,6 +45,9 @@ public class GrabHandPose : MonoBehaviour
         if (arg.interactorObject is XRDirectInteractor)
         {
             HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
+
+            if (handData == null) return;
+
             handData.animator.enabled = false;
 
             if (handData.handType == HandData.HandModelType.Right)
