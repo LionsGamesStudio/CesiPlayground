@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8540040095786461328}
   m_Layer: 0
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,9 +56,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RightZoneCollider: {fileID: 8478361967843608785}
   LeftZoneCollider: {fileID: 7454015279835404111}
-  LayersToCollide:
-  - serializedVersion: 2
-    m_Bits: 512
 --- !u!54 &6603346438540197266
 Rigidbody:
   m_ObjectHideFlags: 0

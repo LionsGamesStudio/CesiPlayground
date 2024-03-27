@@ -48,4 +48,5 @@ MonoBehaviour:
   RowBoardPrefab: {fileID: 6546224240576360583, guid: 1c763f98c616ede41b2001cdc3f78176, type: 3}
   ListOfGame:
   - {fileID: 11400000, guid: 11b2a798d4df36f4a9a4f50dcc6826aa, type: 2}
+  - {fileID: 11400000, guid: 9eb90f09d2dfd4b4e97b81f8c9f75a14, type: 2}
   StorageManager: {fileID: 0}

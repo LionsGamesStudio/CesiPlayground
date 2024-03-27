@@ -10,7 +10,7 @@ namespace Assets.Scripts.Process.MollSmash.Game
     {
         public override IGameStrategy CreateGameStrat(Core.Game.Game game)
         {
-            throw new System.NotImplementedException();
+            return new MollSmashStrategy(game);
         }
     }
 

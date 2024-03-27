@@ -316,20 +316,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4295163637767619960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6252239079939378900}
-        m_TargetAssemblyTypeName: Assets.Scripts.Core.Scoring.ScoreBoardManager,
-          Assembly-CSharp
-        m_MethodName: ChangeScoreBoard
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &894760639626280683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,20 +1686,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5648509086235495452}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6252239079939378900}
-        m_TargetAssemblyTypeName: Assets.Scripts.Core.Scoring.ScoreBoardManager,
-          Assembly-CSharp
-        m_MethodName: ChangeScoreBoard
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5275683044501706417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,19 +1954,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 6252239079939378900}
-        m_TargetAssemblyTypeName: Assets.Scripts.Core.Scoring.ScoreBoardManager,
-          Assembly-CSharp
-        m_MethodName: ChangeScoreBoard
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &5445148470409816608
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,7 +2610,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00005128389}
+  m_AnchoredPosition: {x: 0, y: 0.00091838243}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &9114914128799721442
@@ -3472,7 +3433,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000006914139}
+  m_AnchoredPosition: {x: 0, y: 0.00091838243}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7390634331552699195
@@ -3851,7 +3812,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8346516107259180529}
-  - {fileID: 4687715412792198451}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7638786969916056556
@@ -3864,94 +3824,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ae74570bf7bf6b4886e0a3529496301, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1001 &5998435361288547678
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 245880596970533556}
-    m_Modifications:
-    - target: {fileID: 209486274131332342, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_Name
-      value: ScoreBoardManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 430889258243646346, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: ScoreboardsHolder
-      value: 
-      objectReference: {fileID: 9021767688053604470}
-    - target: {fileID: 430889258243646346, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: ScoreboardFilepath.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 430889258243646346, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: ScoreboardFilepath.Array.data[0]
-      value: gun_club
-      objectReference: {fileID: 0}
-    - target: {fileID: 430889258243646346, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: ScoreboardFilepath.Array.data[1]
-      value: mole_smash
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
---- !u!4 &4687715412792198451 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1310729438293698669, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-  m_PrefabInstance: {fileID: 5998435361288547678}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6252239079939378900 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 430889258243646346, guid: 8d719ce1909b2fc42b019091176ac9fb, type: 3}
-  m_PrefabInstance: {fileID: 5998435361288547678}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15223e4e0b306840b8ab4b0090a39b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

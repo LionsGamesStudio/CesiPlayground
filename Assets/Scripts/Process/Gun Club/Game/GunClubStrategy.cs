@@ -63,7 +63,6 @@ namespace Assets.Scripts.Process.GunClub.Game
         {
             _game.StartedGame = false;
             _currentLevel = 0;
-            _game.Score = 0;
             _currentWave.ResetLevel();
         }
 
@@ -73,7 +72,6 @@ namespace Assets.Scripts.Process.GunClub.Game
         public void EndGame()
         {
             _currentLevel = 0;
-            _game.StartedGame = false;
             _currentWave.ResetLevel();
         }
 
@@ -113,7 +111,7 @@ namespace Assets.Scripts.Process.GunClub.Game
 
                 _game.Display = "End of the game";
 
-                yield return new WaitForSeconds(_currentLevel);
+                yield return new WaitForSeconds(_waves[_currentLevel].CooldownAlive);
 
                 _game.EndGame();
             }

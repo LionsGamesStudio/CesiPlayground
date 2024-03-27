@@ -17,9 +17,7 @@ namespace Assets.Scripts.Core
         [Header("Storage")]
         public StorageManager StorageManager;
 
-        [Header("Parameters")]
-        public InputActionReference ParameterInput;
-        public GameObject ParametersWindow;
+        
 
         [NonSerialized]
         public PlayerData PlayerData;
@@ -51,8 +49,7 @@ namespace Assets.Scripts.Core
                 StorageManager.Store<PlayerData>(jsonName, PlayerData);
             }
 
-            // Input
-            ParameterInput.action.started += ToggleParam;
+            
         }
 
         public void ChangeName(string name)
@@ -72,10 +69,7 @@ namespace Assets.Scripts.Core
             StorageManager.Store<PlayerData>(jsonName, PlayerData) ;
         }
 
-        private void ToggleParam(InputAction.CallbackContext call)
-        {
-            ParametersWindow.SetActive(!ParametersWindow.activeSelf);
-        }
+        
 
     }
 }

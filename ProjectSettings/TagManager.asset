@@ -9,6 +9,8 @@ TagManager:
   - FxTemporaire
   - Bullet
   - ScoreBoard
+  - Hammer
+  - HammerHitZone
   layers:
   - Default
   - TransparentFX

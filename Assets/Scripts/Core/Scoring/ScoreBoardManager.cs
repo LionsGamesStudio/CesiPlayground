@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Assets.Scripts.Core.Scoring
 {
 
-    public class ScoreBoardManager : Singleton<ScoreBoardManager>
+    public class ScoreBoardManager : MonoBehaviour
     {
         [Header("Scoreboards")]
         public GameObject ScoreboardsHolder;
@@ -23,18 +23,28 @@ namespace Assets.Scripts.Core.Scoring
         private Scoreboard scoreboardInUse;
         private string storageFolder = "";
 
+        private bool setupDone = false;
+
         private EventBinding<OnGameFinished> gameFinishedEventBinding;
 
 
-        public void Start()
+        public void Awake()
+        {
+            if(!setupDone)
+                Setup();
+        }
+
+        public void Setup()
         {
             storageFolder = Application.persistentDataPath + "/Score/";
-            if(!System.IO.Directory.Exists(storageFolder))
+            if (!System.IO.Directory.Exists(storageFolder))
                 System.IO.Directory.CreateDirectory(storageFolder);
 
             // Binding
             gameFinishedEventBinding = new EventBinding<OnGameFinished>(ReactScoring);
             EventBus<OnGameFinished>.Register(gameFinishedEventBinding);
+
+            setupDone = true;
         }
 
         public void AddScore(int pos, string name, int score)
@@ -63,6 +73,8 @@ namespace Assets.Scripts.Core.Scoring
             scoreboard.ID = dataGame.GameId;
             scoreboard.Filepath = storageFolder + nameTmp;
             scoreboard.Columns = StorageManager.Get<List<RowBoard>>(scoreboard.Filepath);
+
+            if(scoreboard.Columns == null) scoreboard.Columns = new List<RowBoard>();
 
             scoreboard.SortColumns();
 

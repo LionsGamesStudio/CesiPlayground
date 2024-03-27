@@ -314,6 +314,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.0000039339066
       objectReference: {fileID: 0}
+    - target: {fileID: 3613342906814334373, guid: 55201a59068a8294a9c6496089f39457, type: 3}
+      propertyPath: ListOfGame.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613342906814334373, guid: 55201a59068a8294a9c6496089f39457, type: 3}
+      propertyPath: ListOfGame.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9eb90f09d2dfd4b4e97b81f8c9f75a14, type: 2}
     - target: {fileID: 4365375098965803919, guid: 55201a59068a8294a9c6496089f39457, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

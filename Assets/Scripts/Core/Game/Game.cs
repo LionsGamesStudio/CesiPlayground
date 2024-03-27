@@ -36,6 +36,8 @@ namespace Assets.Scripts.Core.Game
             _numberOfInstance++;
             DontDestroyOnLoad(this.gameObject);
 
+            Display = _displayText;
+
             // Events
             _scoreEventBinding = new EventBinding<OnScoreEvent>(OnScoreEvent);
             EventBus<OnScoreEvent>.Register(_scoreEventBinding);
@@ -49,18 +51,18 @@ namespace Assets.Scripts.Core.Game
             if (!_startedGame)
             {
                 CurrentPlayer = player;
-                GameStrategy.StartGame();
                 _startedGame = true;
+                GameStrategy.StartGame();
 
-                Debug.Log(CurrentPlayer.PlayerData.PlayerName);
-
-                Display = "Score : 0";
             }  
         }
 
         public void ResetGame()
         {
-            GameStrategy.ResetGame();
+            if (!_startedGame)
+            {
+                GameStrategy.ResetGame();
+            }
         }
 
         /// <summary>

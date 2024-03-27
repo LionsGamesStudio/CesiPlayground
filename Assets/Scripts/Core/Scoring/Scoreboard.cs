@@ -23,11 +23,16 @@ namespace Assets.Scripts.Core.Scoring
                 RowBoard oldRow = Columns.Find(obj => obj.HashID == rowBoard.HashID);
                 Columns[Columns.IndexOf(oldRow)] = rowBoard;
             }
+
+            if(Columns == null) Columns = new List<RowBoard>();
+
             SortColumns();
         }
 
         public void SortColumns()
         {
+            if (Columns.Count <= 0) return;
+
             Columns = Columns.OrderByDescending(obj => obj.Score).ToList();
             for(int i = 0; i < Columns.Count; i++)
             {

@@ -48,7 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 0}
   score: 30
-  effectOnDestroy: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+  tagHitting:
+  - Bullet
+  effectOnDestroy: {fileID: 4882679678693066899, guid: 170128f7e97d1c2438429b9795b2f4b1, type: 3}
 --- !u!65 &7042251386586705828
 BoxCollider:
   m_ObjectHideFlags: 0

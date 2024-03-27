@@ -14,7 +14,8 @@ namespace Assets.Scripts.Core.Spawn.Spawners
     public class Spawner : MonoBehaviour
     {
         [SerializeField] protected List<Transform> _spawnPossibilities = new List<Transform>();
-        private List<Vector3> _spawnPossibilitiesAlreadyUsed;
+        private List<Transform> _spawnPossibilitiesNotUsed = new List<Transform>();
+        private Dictionary<Transform, GameObject> _spawnPossibilitiesAlreadyUsed = new Dictionary<Transform, GameObject>();
 
         // Generate a unique seed for each spawner id
         private int _id = Guid.NewGuid().GetHashCode();
@@ -24,12 +25,16 @@ namespace Assets.Scripts.Core.Spawn.Spawners
         private void Awake()
         {
             if (_spawnPossibilities.Count == 0) Debug.LogError("No location for random position provide.");
-            _spawnPossibilitiesAlreadyUsed = new List<Vector3>();
 
             // Add id as name
             this.name = "Spawner_" + _id;
 
             SpawnersManager.Instance.AddSpawner(this);
+
+            foreach(Transform t in _spawnPossibilities)
+            {
+                _spawnPossibilitiesNotUsed.Add(t);
+            }
 
             // Events
             _dispawnSendEventBinding = new EventBinding<OnDispawnRequestSend>(ManageDispawn);
@@ -47,15 +52,15 @@ namespace Assets.Scripts.Core.Spawn.Spawners
         /// <returns></returns>
         public virtual GameObject Spawn<T>(int posIndex, T entity)
         {
-            // Check if the position is already used
-            if (_spawnPossibilitiesAlreadyUsed.Contains(_spawnPossibilities[posIndex].position))
-            {
-                return null;
-            }
+            if(posIndex < 0 || posIndex > _spawnPossibilitiesNotUsed.Count) return null;
 
-            _spawnPossibilitiesAlreadyUsed.Add(_spawnPossibilities[posIndex].position);
+            Transform pos = _spawnPossibilitiesNotUsed[posIndex];
+            GameObject obj = SpawnManager.Instance.InstantiateObject(entity as GameObject, pos);
 
-            return SpawnManager.Instance.InstantiateObject(entity as GameObject, _spawnPossibilities[posIndex].transform);
+            _spawnPossibilitiesAlreadyUsed.Add(pos, obj);
+            _spawnPossibilitiesNotUsed.Remove(pos);
+
+            return obj;
         }
 
         /// <summary>
@@ -65,9 +70,21 @@ namespace Assets.Scripts.Core.Spawn.Spawners
         public virtual void Dispawn(GameObject entity)
         {
             if(entity == null) return;
-            if(!_spawnPossibilitiesAlreadyUsed.Contains(entity.transform.position)) return;
+            if(!_spawnPossibilitiesAlreadyUsed.ContainsValue(entity)) return;
 
-            _spawnPossibilitiesAlreadyUsed.Remove(entity.transform.position);
+            Transform t = null;
+            foreach(KeyValuePair<Transform, GameObject> keyValuePair in _spawnPossibilitiesAlreadyUsed)
+            {
+                if(keyValuePair.Value == entity)
+                {
+                    t = keyValuePair.Key;
+                }
+            }
+
+            if(t == null) return;
+
+            _spawnPossibilitiesAlreadyUsed.Remove(t);
+            _spawnPossibilitiesNotUsed.Add(t);
             SpawnManager.Instance.DestroyObject(entity);
         }
 
@@ -80,15 +97,43 @@ namespace Assets.Scripts.Core.Spawn.Spawners
         public virtual void Dispawn(GameObject entity, float time)
         {
             if (entity == null) return;
-            if (!_spawnPossibilitiesAlreadyUsed.Contains(entity.transform.position)) return;
+            if (!_spawnPossibilitiesAlreadyUsed.ContainsValue(entity)) return;
 
-            Vector3 savePosition = entity.transform.position;
+            Transform t = null;
+            foreach (KeyValuePair<Transform, GameObject> keyValuePair in _spawnPossibilitiesAlreadyUsed)
+            {
+                if (keyValuePair.Value == entity)
+                {
+                    t = keyValuePair.Key;
+                }
+            }
+
+            if (t == null) return;
 
             SpawnManager.Instance.DestroyObject(entity, time);
-            StartCoroutine(WaitForTimeToFreePosition(time, savePosition));
+            StartCoroutine(WaitForTimeToFreePosition(time, t));
         }
 
+
         #endregion
+
+        /// <summary>
+        /// Clear the spawner and dispawn all object
+        /// </summary>
+        public void ClearSpawner()
+        {
+            foreach(KeyValuePair<Transform, GameObject> keyValuePair in _spawnPossibilitiesAlreadyUsed)
+            {
+                Destroy(keyValuePair.Value);
+            }
+            _spawnPossibilitiesAlreadyUsed.Clear();
+            _spawnPossibilitiesNotUsed.Clear();
+
+            foreach(Transform t in _spawnPossibilities)
+            {
+                _spawnPossibilitiesNotUsed.Add(t);
+            }
+        }
 
         /// <summary>
         /// Add a delay before freeing a position of spawning
@@ -96,11 +141,14 @@ namespace Assets.Scripts.Core.Spawn.Spawners
         /// <param name="time">Delay to wait for</param>
         /// <param name="position">Position to free</param>
         /// <returns></returns>
-        private IEnumerator WaitForTimeToFreePosition(float time, Vector3 position)
+        private IEnumerator WaitForTimeToFreePosition(float time, Transform position)
         {
             yield return new WaitForSeconds(time);
-            if(_spawnPossibilitiesAlreadyUsed.Contains(position))
+            if(_spawnPossibilitiesAlreadyUsed.ContainsKey(position))
+            {
                 _spawnPossibilitiesAlreadyUsed.Remove(position);
+                _spawnPossibilitiesNotUsed.Add(position);
+            }
         }
 
         /// <summary>
@@ -121,10 +169,6 @@ namespace Assets.Scripts.Core.Spawn.Spawners
             }
         }
 
-        public List<Transform> SpawnPosibilities { get => _spawnPossibilities; }
-        public List<Vector3> SpawnPosibilitiesAlreadyUsed { get => _spawnPossibilitiesAlreadyUsed; }
-        
-
         /// --------- Assure that the spawner is at the right time in the list of spawners ---------   
 
         protected virtual void OnDisable()
@@ -143,5 +187,9 @@ namespace Assets.Scripts.Core.Spawn.Spawners
         }
 
         public int ID { get => _id;}
+        public int NumberOfSpawningSpot { get => _spawnPossibilities.Count; }
+
+        public List<Transform> PositionsAvailable { get => _spawnPossibilitiesNotUsed; }
+        public Dictionary<Transform, GameObject> SpawnPosibilitiesAlreadyUsed { get => _spawnPossibilitiesAlreadyUsed; }
     }
 }
