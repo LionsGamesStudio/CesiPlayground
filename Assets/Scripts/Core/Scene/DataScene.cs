@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Core.Scene
 {
+    /// <summary>
+    /// Data of a scene to spawn
+    /// </summary>
     [CreateAssetMenu(fileName = "DataScene", menuName = "ScriptableObjects/DataScene", order = 1)]
     public class DataScene : ScriptableObject
     {

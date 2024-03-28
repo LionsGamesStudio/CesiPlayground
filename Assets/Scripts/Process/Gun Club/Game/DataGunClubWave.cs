@@ -6,10 +6,10 @@ namespace Assets.Scripts.Process.GunClub.Game
     [CreateAssetMenu(fileName = "new Gun Club Wave", menuName = "Wave/GunClubWave", order = 1)]
     public class DataGunClubWave : ScriptableObject
     {
-        public int NumberOfTarget;
-        public float CooldownSpawn;
-        public float CooldownAlive;
-        public List<GameObject> Prefab;
+        [Tooltip("Number of target to spawn")] public int NumberOfTarget;
+        [Tooltip("Cooldown between spawn")] public float CooldownSpawn;
+        [Tooltip("Time target alive")] public int CooldownAlive;
+        [Tooltip("Prefabs of the targets possibles to spawn")] public List<GameObject> Prefab;
 
     }
 }

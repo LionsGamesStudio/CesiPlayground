@@ -7,6 +7,8 @@ namespace Assets.Scripts.Core.Game
     {
         private List<(DataGame, GameObject)> _gamesInstances = new List<(DataGame, GameObject)>();
 
+        #region Loading
+
         /// <summary>
         /// Load a game from a DataGame
         /// </summary>
@@ -33,6 +35,8 @@ namespace Assets.Scripts.Core.Game
             _gamesInstances.Remove(_gamesInstances.Find(x => x.Item2 == game));
             Destroy(game.gameObject);
         }
+
+        #endregion
 
         public List<GameObject> GamePrefabs
         {

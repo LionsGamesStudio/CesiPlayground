@@ -23,6 +23,7 @@ namespace Assets.Scripts.Core
                         obj.name = typeof(T).Name + "AutoCreated";
                         _isAutoCreated = true;
                         _instance = obj.AddComponent<T>();
+                        DontDestroyOnLoad(obj);
                     }
                 }
 

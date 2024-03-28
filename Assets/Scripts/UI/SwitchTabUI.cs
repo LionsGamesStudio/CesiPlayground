@@ -21,6 +21,9 @@ namespace Assets.Scripts.UI
             _screensToDisplay.Add(_myScreen);
         }
 
+        /// <summary>
+        /// Switch to actual screen (_myScreen). To put on tab button
+        /// </summary>
         public void SwitchTab()
         {
             for(int i = 0; i < _tabs.Count; i++) {

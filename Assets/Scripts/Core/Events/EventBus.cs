@@ -7,7 +7,18 @@ namespace Assets.Scripts.Core.Events
     {
         static readonly HashSet<IEventBinding<T>> _bindings = new HashSet<IEventBinding<T>>();
 
+        #region Events
+
+        /// <summary>
+        /// Register something to listen to event of T type
+        /// </summary>
+        /// <param name="binding"></param>
         public static void Register(IEventBinding<T> binding) => _bindings.Add(binding);
+
+        /// <summary>
+        /// Unregister the listening of a T event
+        /// </summary>
+        /// <param name="binding"></param>
         public static void Unregister(IEventBinding<T> binding) => _bindings.Remove(binding);
 
         /// <summary>
@@ -22,6 +33,8 @@ namespace Assets.Scripts.Core.Events
                 binding.OnEventNoArgs.Invoke();
             }
         }
+
+        #endregion
 
         static void Clear() => _bindings.Clear();
     }

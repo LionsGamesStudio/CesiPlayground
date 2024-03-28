@@ -20,6 +20,7 @@ namespace Assets.Scripts.Core.Events
             set => _onEventNoArgs = value; 
         }
 
+        #region Event Bindings
         public EventBinding(Action<T> onEvent) => _onEvent = onEvent;
         public EventBinding(Action onEventNoArgs) => _onEventNoArgs = onEventNoArgs;
 
@@ -28,5 +29,7 @@ namespace Assets.Scripts.Core.Events
 
         public void RemoveListener(Action<T> onEvent) => _onEvent -= onEvent;
         public void RemoveListener(Action onEventNoArgs) => _onEventNoArgs -= onEventNoArgs;
+
+        #endregion
     }
 }

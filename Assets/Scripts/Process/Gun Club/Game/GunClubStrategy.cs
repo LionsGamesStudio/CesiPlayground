@@ -1,7 +1,10 @@
-﻿using Assets.Scripts.Core.Game;
+﻿using Assets.Scripts.Core;
+using Assets.Scripts.Core.Events;
+using Assets.Scripts.Core.Game;
 using Assets.Scripts.Core.Scoring;
 using Assets.Scripts.Core.Spawn.Spawners;
 using Assets.Scripts.Core.Wave;
+using Assets.Scripts.Process.Events;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +16,11 @@ namespace Assets.Scripts.Process.GunClub.Game
     {
         private Assets.Scripts.Core.Game.Game _game;
         private List<DataGunClubWave> _waves;
-        private Spawner _spawner;
 
         private IWave _currentWave;
         private int _currentLevel = 0;
 
+        private EventBinding<OnWaveFinished> _waveFinished;
 
         public GunClubStrategy(Assets.Scripts.Core.Game.Game game, List<DataGunClubWave> waves)
         {
@@ -29,24 +32,27 @@ namespace Assets.Scripts.Process.GunClub.Game
                 Debug.LogError("No data level provide.");
                 return;
             }
+
+            _waveFinished = new EventBinding<OnWaveFinished>(NextWave);
+            EventBus<OnWaveFinished>.Register(_waveFinished);
         }
 
-        /// <summary>
-        /// Start the game
-        /// </summary>
+        #region Game Loop
+
         public void StartGame()
         {
-            if(_spawner == null)
+            if(_game.Spawner == null)
             {
                 Debug.LogError("No spawner found.");
                 return;
             }
 
-            _game.StartedGame = true;
-            UIManager.Instance.ScoreText.text = "Score : 0";
             _game.Score= 0;
             _currentLevel = 0;
-            _currentWave.InitializeLevel();
+
+            _currentWave = new GunClubWave(_game, _waves[_currentLevel]);
+
+            _game.StartCoroutine(LaunchGame());
         }
 
 
@@ -54,79 +60,85 @@ namespace Assets.Scripts.Process.GunClub.Game
         {
             _game.StartedGame = false;
             _currentLevel = 0;
-            _game.Score = 0;
-            _game.PlayerName = "Unknown";
             _currentWave.ResetLevel();
         }
 
-        /// <summary>
-        /// End the game
-        /// </summary>
         public void EndGame()
         {
             _currentLevel = 0;
-            _game.StartedGame = false;
-            _game.LaunchParallelLogic(WaitForAllTargetToDispawn());
             _currentWave.ResetLevel();
         }
+
+        #endregion
+
+        #region Logic
 
         /// <summary>
         /// Go to the next wave
         /// </summary>
-        public void NextWave()
+        public void NextWave(OnWaveFinished e)
         {
-            CurrentWave = new GunClubWave(_game, Waves[CurrentLevel], _spawner);
-            //WAITING Maybe
-            if (Waves.Count - 1 <= CurrentLevel)
+            if (e.Game.ID != _game.ID) return;
+
+            _currentLevel++;
+
+            _game.StartCoroutine(DisplayNextWave());
+        }
+
+        /// <summary>
+        /// Setup UI And initialize wave
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator LaunchGame()
+        {
+            _game.Display = "Start Game";
+            yield return new WaitForSeconds(2);
+
+            _game.Display = "Wave 1";
+            yield return new WaitForSeconds(2);
+
+            _game.Display = "Score : 0";
+            _currentWave.InitializeLevel();
+        }
+
+        /// <summary>
+        /// Change the wave or detect end of game
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator DisplayNextWave()
+        {
+            yield return new WaitForSeconds(2);
+
+            // Check end of game
+            if (_waves.Count - 1 <= _currentLevel)
             {
                 Debug.Log("End of the game");
+
+                _game.Display = "End of the game";
+
+                yield return new WaitForSeconds(_waves[_currentLevel].CooldownAlive);
+
                 _game.EndGame();
             }
+            // Go next wave
             else
             {
-                CurrentWave.InitializeLevel();
+                _game.Display = "Next Wave";
+                yield return new WaitForSeconds(2);
+
+                int waveLevel = _currentLevel;
+
+                _game.Display = "Wave " + (waveLevel + 1);
+                yield return new WaitForSeconds(2);
+
+                _game.Display = "Score : " + _game.Score;
+
+                _currentWave = new GunClubWave(_game, _waves[_currentLevel]);
+                _currentWave.InitializeLevel();
             }
+
         }
 
-        private IEnumerator WaitForAllTargetToDispawn()
-        {
-            yield return new WaitUntil(() => _spawner.SpawnPosibilitiesAlreadyUsed.Count == 0);
-            UIManager.Instance.ScoreText.text = "Score : 0";
-            ScoreBoardManager.Instance.AddScore(-1, _game.PlayerName, _game.Score);
-        }
-
-        // GETTERS AND SETTERS
-
-        public IWave CurrentWave
-        {
-            get { return _currentWave; }
-            set 
-            { 
-                _currentWave = value; 
-                _currentLevel++;
-            }
-        }
-
-        public int CurrentLevel
-        {
-            get { return _currentLevel; }
-        }
-
-        public List<DataGunClubWave> Waves
-        {
-            get { return _waves; }
-        }
-
-        public void SetSpawner(Spawner spawner)
-        {
-            _spawner = spawner;
-            _currentWave = new GunClubWave(_game, _waves[0], _spawner);
-        }
-
-        public Spawner GetSpawner()
-        {
-            return _spawner;
-        }
-
+        #endregion
     }
 }

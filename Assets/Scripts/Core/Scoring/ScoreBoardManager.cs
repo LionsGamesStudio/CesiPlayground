@@ -1,143 +1,63 @@
+using Assets.Scripts.Core.Events;
+using Assets.Scripts.Core.Game;
+using Assets.Scripts.Core.Storing;
+using Assets.Scripts.Process.Events;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Core.Json;
 
 namespace Assets.Scripts.Core.Scoring
 {
-    [Serializable]
-    public class RowBoard
+
+    public class ScoreBoardManager : MonoBehaviour
     {
-        public int Pos;
-        public string PlayerName;
-        public int Score;
-
-        public RowBoard(int pos, string playerName, int score)
-        {
-            Pos = pos;
-            PlayerName = playerName;
-            Score = score;
-        }
-
-        public bool IsNewScore(RowBoard b)
-        {
-            if (PlayerName == b.PlayerName && Score != b.Score)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        // Overwrite == operator
-        public static bool operator ==(RowBoard a, RowBoard b)
-        {
-            return a.PlayerName == b.PlayerName && a.Score == b.Score;
-        }
-
-        // Overwrite != operator
-        public static bool operator !=(RowBoard a, RowBoard b)
-        {
-            return a.PlayerName != b.PlayerName || a.Score != b.Score;
-        }
-
-
-    }
-
-
-
-    public class ScoreBoardManager : Singleton<ScoreBoardManager>
-    {
-        // List of all scoreboard object
-        public List<List<RowBoard>> RowBoards = new List<List<RowBoard>>();
+        [Header("Scoreboards")]
+        public GameObject ScoreboardsHolder;
         public GameObject RowBoardPrefab;
 
-        // List of each content for each scoreboard (the UI of the scoreboard is instantiated in the content)
-        public List<Transform> Contents = new List<Transform>();
+        /// <summary>
+        /// The games we want to have a scoreboard
+        /// </summary>
+        public List<DataGame> ListOfGame = new List<DataGame>();
 
-        // List of the name of each json files containing the scoreboards
-        public List<string> JsonNames;
+        [Header("Storage")]
+        public StorageManager StorageManager;
 
-        // List of the path to each json files
-        private List<string> _jsonPaths = new List<string>();
+        private Scoreboard scoreboardInUse;
+        private string storageFolder = "";
+
+        private bool setupDone = false;
+
+        private EventBinding<OnGameFinished> gameFinishedEventBinding;
+
+
+        public void Awake()
+        {
+            if(!setupDone)
+                Setup();
+        }
+
+        public void Setup()
+        {
+            storageFolder = Application.persistentDataPath + "/Score/";
+            if (!System.IO.Directory.Exists(storageFolder))
+                System.IO.Directory.CreateDirectory(storageFolder);
+
+            // Binding
+            gameFinishedEventBinding = new EventBinding<OnGameFinished>(ReactScoring);
+            EventBus<OnGameFinished>.Register(gameFinishedEventBinding);
+
+            setupDone = true;
+        }
+
+        #region Scoreboard
 
         /// <summary>
-        /// The json file of the scoreboard currently in use
+        /// Add a score to the current scoreboard
         /// </summary>
-        public string ActualJsonFile
-        {
-            get; set;
-        }
-
-        public List<RowBoard> BoardInUse
-        {
-            get; set;
-        }
-
-        public Transform ContentInUse
-        {
-            get; set;
-        }
-
-        // Start is called before the first frame update
-        public void Start()
-        {
-            // Path to score saving in Resources directory
-            foreach (string name in JsonNames)
-            {
-                // Check if extension is precised in the json name
-                string nameTmp = name.Split('.')[0] + ".json";
-                _jsonPaths.Add("Assets/Resources/Scores/" + nameTmp);
-            }
-
-            for (int i = 0; i < _jsonPaths.Count; i++)
-            {
-                ActualJsonFile = _jsonPaths[i];
-                ContentInUse = Contents[i];
-
-                // Load the json file
-                List<RowBoard> board = JsonManager.LoadJson<RowBoard>(ActualJsonFile);
-
-                if (board == null)
-                {
-                    board = new List<RowBoard>();
-
-                    RowBoards.Add(board);
-
-                    ActualJsonFile = _jsonPaths[i + 1];
-                    BoardInUse = RowBoards[i];
-                    ContentInUse = Contents[i + 1];
-                    return;
-                }
-
-                // Add the boards to the UI
-                for (int j = board.Count - 1; j >= 0; j--)
-                {
-                    var elem = board[j];
-                    GameObject newRow = Instantiate(RowBoardPrefab, ContentInUse);
-                    newRow.GetComponent<RowBoardControler>().Position.text = elem.Pos.ToString();
-                    newRow.GetComponent<RowBoardControler>().Name.text = elem.PlayerName;
-                    newRow.GetComponent<RowBoardControler>().Score.text = elem.Score.ToString();
-                }
-
-                RowBoards.Add(board);
-
-                BoardInUse = RowBoards[i];
-            }
-        }
-
-        private void SortBoard(List<RowBoard> board)
-        {
-            board.Sort(delegate (RowBoard x, RowBoard y) {
-                return x.Score.CompareTo(y.Score);
-            });
-            int newPos = board.Count - 1;
-            foreach (RowBoard row in board)
-            {
-                row.Pos = newPos;
-                newPos--;
-            }
-        }
-
+        /// <param name="pos">Position of the score</param>
+        /// <param name="name">Name of the player</param>
+        /// <param name="score">Score of the player</param>
         public void AddScore(int pos, string name, int score)
         {
             if (name == "")
@@ -146,53 +66,101 @@ namespace Assets.Scripts.Core.Scoring
             }
             RowBoard newScore = new RowBoard(pos, name, score);
 
-            // Check if the player is already in the board
-            bool isNewScore = false;
-            foreach (RowBoard row in BoardInUse)
-            {
-                if (row.IsNewScore(newScore) || row == newScore)
-                {
-                    row.Score = newScore.Score;
-                    row.Pos = newScore.Pos;
-                    isNewScore = true;
+            scoreboardInUse.AddScore(newScore);
 
-                    break;
-                }
-            }
-
-            // If it's a new player, add it to the board
-            if (!isNewScore)
-            {
-                BoardInUse.Add(newScore);
-            }
-
-            // Sort the board
-            SortBoard(BoardInUse);
-
-            // Display the new score
-            AddNewScoreToUI();
-
-            // Save the board
-            JsonManager.SaveListIntoJson<RowBoard>(BoardInUse, ActualJsonFile);
-
+            DisplayUI(scoreboardInUse);
         }
 
-        private void AddNewScoreToUI()
+        /// <summary>
+        /// Change the scoreboard to use
+        /// </summary>
+        /// <param name="index"></param>
+        public void ChangeScoreBoard(int index)
         {
-            for (int i = 0; i < ContentInUse.childCount; i++)
+            scoreboardInUse = LoadScoreboard(ListOfGame[index]);
+        }
+
+        /// <summary>
+        /// Load data of a scoreboard
+        /// </summary>
+        /// <param name="dataGame">The data of the game we want to load the scoreboard</param>
+        /// <returns></returns>
+        private Scoreboard LoadScoreboard(DataGame dataGame)
+        {
+            string boardFilename = dataGame.GameScoreboardFileName;
+            string nameTmp = boardFilename.Split('.')[0] + ".json";
+            Scoreboard scoreboard = new Scoreboard();
+            scoreboard.ID = dataGame.GameId;
+            scoreboard.Filepath = storageFolder + nameTmp;
+            scoreboard.Rows = StorageManager.Get<List<RowBoard>>(scoreboard.Filepath);
+
+            if(scoreboard.Rows == null) scoreboard.Rows = new List<RowBoard>();
+
+            scoreboard.SortRows();
+
+            DisplayUI(scoreboard);
+
+            return scoreboard;
+        }
+
+        #endregion
+
+        #region UI
+
+        /// <summary>
+        /// Display UI of the scoreboard
+        /// </summary>
+        /// <param name="scoreboard"></param>
+        private void DisplayUI(Scoreboard scoreboard)
+        {
+            // Clear the old scoreboard
+            int size = ScoreboardsHolder.transform.childCount;
+            for (int i = 0; i < size; i++)
             {
-                GameObject obj = ContentInUse.GetChild(i).gameObject;
-                Destroy(obj);
+                Destroy(ScoreboardsHolder.transform.GetChild(i).gameObject);
             }
 
-            for (int i = BoardInUse.Count - 1; i >= 0; i--)
+            if (scoreboard == null) return;
+
+            // Fill with new scoreboard
+            foreach (RowBoard column in scoreboard.Rows)
             {
-                var elem = BoardInUse[i];
-                GameObject newRow = Instantiate(RowBoardPrefab, ContentInUse);
-                newRow.GetComponent<RowBoardControler>().Position.text = elem.Pos.ToString();
-                newRow.GetComponent<RowBoardControler>().Name.text = elem.PlayerName;
-                newRow.GetComponent<RowBoardControler>().Score.text = elem.Score.ToString();
+                GameObject newRow = Instantiate(RowBoardPrefab, ScoreboardsHolder.transform);
+                newRow.GetComponent<RowBoardUI>().Position.text = column.Pos.ToString();
+                newRow.GetComponent<RowBoardUI>().Name.text = column.PlayerName;
+                newRow.GetComponent<RowBoardUI>().Score.text = column.Score.ToString();
             }
         }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// React to a score of a game
+        /// </summary>
+        /// <param name="e"></param>
+        private void ReactScoring(OnGameFinished e)
+        {
+            int i = 0;
+            foreach(DataGame data in ListOfGame)
+            {
+                Scoreboard scoreboard = LoadScoreboard(data);
+                if (scoreboard != null && scoreboard.ID == e.GameId)
+                {
+                    RowBoard row = new RowBoard(0, e.Player.PlayerData.PlayerId, e.Player.PlayerData.PlayerName, e.Score);
+                    scoreboard.AddScore(row);
+
+                    StorageManager.Store<List<RowBoard>>(scoreboard.Filepath, scoreboard.Rows);
+
+                    ChangeScoreBoard(i);
+                }
+
+                i++;
+            }
+        }
+
+        #endregion
+
     }
 }

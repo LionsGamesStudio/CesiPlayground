@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8addc554ab618418628b539a9e5574, type: 3}
+  m_Name: Easy
+  m_EditorClassIdentifier: 
+  Name: Easy
+  LifePoint: 1000
+  PrefabsMolls:
+  - {fileID: 5271164571076807960, guid: 6cf78f87797ec2849893c917214ff134, type: 3}
+  DifficultyMultiplier: 0.8
+  MultiplierReducer: 0.001
+  NumberOfEnnemies:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0059165955
+      value: 1.0021667
+      inSlope: 0.0005444077
+      outSlope: 0.0005444077
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 14917.649
+      value: 9.123446
+      inSlope: 0.0000013976186
+      outSlope: 0.0000013976186
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09789362
+    - serializedVersion: 3
+      time: 414542.34
+      value: 8.911086
+      inSlope: -0.00000061822334
+      outSlope: -0.00000061822334
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.107063174
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  GoOutsideRate: 70
