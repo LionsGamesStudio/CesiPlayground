@@ -27,6 +27,10 @@ namespace Assets.Scripts.Process.Object.Pistol
             _grabbable.activated.AddListener(FireBullet);
         }
 
+        /// <summary>
+        /// Fire a bullet
+        /// </summary>
+        /// <param name="arg"></param>
         public void FireBullet(ActivateEventArgs arg)
         {
             if (_nextFireTime > Time.time) return;

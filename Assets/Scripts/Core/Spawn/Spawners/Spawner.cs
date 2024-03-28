@@ -13,7 +13,7 @@ namespace Assets.Scripts.Core.Spawn.Spawners
     /// </summary>
     public class Spawner : MonoBehaviour
     {
-        [SerializeField] protected List<Transform> _spawnPossibilities = new List<Transform>();
+        [SerializeField, Tooltip("Positions where we can spawn game object")] protected List<Transform> _spawnPossibilities = new List<Transform>();
         private List<Transform> _spawnPossibilitiesNotUsed = new List<Transform>();
         private Dictionary<Transform, GameObject> _spawnPossibilitiesAlreadyUsed = new Dictionary<Transform, GameObject>();
 
@@ -151,6 +151,8 @@ namespace Assets.Scripts.Core.Spawn.Spawners
             }
         }
 
+        #region Events
+
         /// <summary>
         /// Manage how to dispawn an object
         /// </summary>
@@ -169,6 +171,8 @@ namespace Assets.Scripts.Core.Spawn.Spawners
             }
         }
 
+        #endregion
+
         /// --------- Assure that the spawner is at the right time in the list of spawners ---------   
 
         protected virtual void OnDisable()
@@ -186,10 +190,21 @@ namespace Assets.Scripts.Core.Spawn.Spawners
             SpawnersManager.Instance.RemoveSpawner(this);
         }
 
+        #region Getters
+
         public int ID { get => _id;}
         public int NumberOfSpawningSpot { get => _spawnPossibilities.Count; }
 
+        /// <summary>
+        /// List of all position where there isn't anything spawned
+        /// </summary>
         public List<Transform> PositionsAvailable { get => _spawnPossibilitiesNotUsed; }
+
+        /// <summary>
+        /// Dictionary of all position used with the game object instantiated at those position
+        /// </summary>
         public Dictionary<Transform, GameObject> SpawnPosibilitiesAlreadyUsed { get => _spawnPossibilitiesAlreadyUsed; }
+
+        #endregion
     }
 }

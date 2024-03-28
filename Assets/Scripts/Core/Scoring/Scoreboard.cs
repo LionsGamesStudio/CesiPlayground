@@ -8,41 +8,66 @@ namespace Assets.Scripts.Core.Scoring
     [Serializable]
     public class Scoreboard
     {
+        /// <summary>
+        /// Unique ID
+        /// </summary>
         public string ID;
-        public List<RowBoard> Columns = new List<RowBoard>();
+
+        /// <summary>
+        /// Rows of the scoreboard
+        /// </summary>
+        public List<RowBoard> Rows = new List<RowBoard>();
+
+        /// <summary>
+        /// Path to the file containing the data
+        /// </summary>
         public string Filepath;
 
+        /// <summary>
+        /// Add a score in the scoreboard
+        /// </summary>
+        /// <param name="rowBoard">Row with the score to add</param>
         public void AddScore(RowBoard rowBoard)
         {
             if (IsNewScore(rowBoard))
             {
-                Columns.Add(rowBoard);
+                Rows.Add(rowBoard);
             }
             else if(IsSuperiorScore(rowBoard))
             {
-                RowBoard oldRow = Columns.Find(obj => obj.HashID == rowBoard.HashID);
-                Columns[Columns.IndexOf(oldRow)] = rowBoard;
+                RowBoard oldRow = Rows.Find(obj => obj.HashID == rowBoard.HashID);
+                Rows[Rows.IndexOf(oldRow)] = rowBoard;
             }
 
-            if(Columns == null) Columns = new List<RowBoard>();
+            if(Rows == null) Rows = new List<RowBoard>();
 
-            SortColumns();
+            SortRows();
         }
 
-        public void SortColumns()
+        #region Actions on rows list
+
+        /// <summary>
+        /// Sort the rows by score in descending order
+        /// </summary>
+        public void SortRows()
         {
-            if (Columns.Count <= 0) return;
+            if (Rows.Count <= 0) return;
 
-            Columns = Columns.OrderByDescending(obj => obj.Score).ToList();
-            for(int i = 0; i < Columns.Count; i++)
+            Rows = Rows.OrderByDescending(obj => obj.Score).ToList();
+            for(int i = 0; i < Rows.Count; i++)
             {
-                Columns[i].Pos = i;
+                Rows[i].Pos = i;
             }
         }
 
+        /// <summary>
+        /// Check if it's new score
+        /// </summary>
+        /// <param name="rowBoard"></param>
+        /// <returns></returns>
         private bool IsNewScore(RowBoard rowBoard)
         {
-            foreach (RowBoard col in Columns)
+            foreach (RowBoard col in Rows)
             {
                 if(col.HashID == rowBoard.HashID)
                     return false;
@@ -51,9 +76,14 @@ namespace Assets.Scripts.Core.Scoring
             return true;
         }
 
+        /// <summary>
+        /// Check if score is better than last one
+        /// </summary>
+        /// <param name="rowBoard">Row of the actual score</param>
+        /// <returns></returns>
         private bool IsSuperiorScore(RowBoard rowBoard)
         {
-            foreach (RowBoard col in Columns)
+            foreach (RowBoard col in Rows)
             {
                 if (col.HashID == rowBoard.HashID && col.Score < rowBoard.Score)
                     return true;
@@ -62,6 +92,7 @@ namespace Assets.Scripts.Core.Scoring
             return false;
         }
 
+        #endregion
 
     }
 }

@@ -15,6 +15,9 @@ namespace Assets.Scripts.Core.Scoring
         public GameObject ScoreboardsHolder;
         public GameObject RowBoardPrefab;
 
+        /// <summary>
+        /// The games we want to have a scoreboard
+        /// </summary>
         public List<DataGame> ListOfGame = new List<DataGame>();
 
         [Header("Storage")]
@@ -47,6 +50,14 @@ namespace Assets.Scripts.Core.Scoring
             setupDone = true;
         }
 
+        #region Scoreboard
+
+        /// <summary>
+        /// Add a score to the current scoreboard
+        /// </summary>
+        /// <param name="pos">Position of the score</param>
+        /// <param name="name">Name of the player</param>
+        /// <param name="score">Score of the player</param>
         public void AddScore(int pos, string name, int score)
         {
             if (name == "")
@@ -60,11 +71,20 @@ namespace Assets.Scripts.Core.Scoring
             DisplayUI(scoreboardInUse);
         }
 
+        /// <summary>
+        /// Change the scoreboard to use
+        /// </summary>
+        /// <param name="index"></param>
         public void ChangeScoreBoard(int index)
         {
             scoreboardInUse = LoadScoreboard(ListOfGame[index]);
         }
 
+        /// <summary>
+        /// Load data of a scoreboard
+        /// </summary>
+        /// <param name="dataGame">The data of the game we want to load the scoreboard</param>
+        /// <returns></returns>
         private Scoreboard LoadScoreboard(DataGame dataGame)
         {
             string boardFilename = dataGame.GameScoreboardFileName;
@@ -72,17 +92,25 @@ namespace Assets.Scripts.Core.Scoring
             Scoreboard scoreboard = new Scoreboard();
             scoreboard.ID = dataGame.GameId;
             scoreboard.Filepath = storageFolder + nameTmp;
-            scoreboard.Columns = StorageManager.Get<List<RowBoard>>(scoreboard.Filepath);
+            scoreboard.Rows = StorageManager.Get<List<RowBoard>>(scoreboard.Filepath);
 
-            if(scoreboard.Columns == null) scoreboard.Columns = new List<RowBoard>();
+            if(scoreboard.Rows == null) scoreboard.Rows = new List<RowBoard>();
 
-            scoreboard.SortColumns();
+            scoreboard.SortRows();
 
             DisplayUI(scoreboard);
 
             return scoreboard;
         }
 
+        #endregion
+
+        #region UI
+
+        /// <summary>
+        /// Display UI of the scoreboard
+        /// </summary>
+        /// <param name="scoreboard"></param>
         private void DisplayUI(Scoreboard scoreboard)
         {
             // Clear the old scoreboard
@@ -95,7 +123,7 @@ namespace Assets.Scripts.Core.Scoring
             if (scoreboard == null) return;
 
             // Fill with new scoreboard
-            foreach (RowBoard column in scoreboard.Columns)
+            foreach (RowBoard column in scoreboard.Rows)
             {
                 GameObject newRow = Instantiate(RowBoardPrefab, ScoreboardsHolder.transform);
                 newRow.GetComponent<RowBoardUI>().Position.text = column.Pos.ToString();
@@ -104,6 +132,14 @@ namespace Assets.Scripts.Core.Scoring
             }
         }
 
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// React to a score of a game
+        /// </summary>
+        /// <param name="e"></param>
         private void ReactScoring(OnGameFinished e)
         {
             int i = 0;
@@ -115,7 +151,7 @@ namespace Assets.Scripts.Core.Scoring
                     RowBoard row = new RowBoard(0, e.Player.PlayerData.PlayerId, e.Player.PlayerData.PlayerName, e.Score);
                     scoreboard.AddScore(row);
 
-                    StorageManager.Store<List<RowBoard>>(scoreboard.Filepath, scoreboard.Columns);
+                    StorageManager.Store<List<RowBoard>>(scoreboard.Filepath, scoreboard.Rows);
 
                     ChangeScoreBoard(i);
                 }
@@ -124,7 +160,7 @@ namespace Assets.Scripts.Core.Scoring
             }
         }
 
-        
+        #endregion
 
     }
 }

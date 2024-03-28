@@ -30,6 +30,8 @@ namespace Assets.Scripts.Core.Scene
             }
         }
 
+        #region Loading Scene
+
         /// <summary>
         /// Instantiate a scene asynchronously
         /// </summary>
@@ -133,5 +135,6 @@ namespace Assets.Scripts.Core.Scene
 
         }
 
+        #endregion
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Process.Events.Objects.MollEvent
 {
+    /// <summary>
+    /// Event sent when a moll is instantiated
+    /// </summary>
     public class OnMollBirth : IEvent
     {
         public Game Game;

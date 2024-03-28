@@ -2,9 +2,12 @@
 
 namespace Assets.Scripts.Core.Game
 {
+    /// <summary>
+    /// Permit to spawn a game where this object is place
+    /// </summary>
     public class GameBeacon : MonoBehaviour
     {
-        [SerializeField] protected DataGame _gameData;
+        [SerializeField, Tooltip("Data of the game to spawn")] protected DataGame _gameData;
 
         public void Start()
         {

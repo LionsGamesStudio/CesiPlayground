@@ -39,9 +39,6 @@ namespace Assets.Scripts.Process.GunClub.Game
 
         #region Game Loop
 
-        /// <summary>
-        /// Start the game
-        /// </summary>
         public void StartGame()
         {
             if(_game.Spawner == null)
@@ -66,9 +63,6 @@ namespace Assets.Scripts.Process.GunClub.Game
             _currentWave.ResetLevel();
         }
 
-        /// <summary>
-        /// End the game
-        /// </summary>
         public void EndGame()
         {
             _currentLevel = 0;
@@ -76,6 +70,8 @@ namespace Assets.Scripts.Process.GunClub.Game
         }
 
         #endregion
+
+        #region Logic
 
         /// <summary>
         /// Go to the next wave
@@ -89,6 +85,10 @@ namespace Assets.Scripts.Process.GunClub.Game
             _game.StartCoroutine(DisplayNextWave());
         }
 
+        /// <summary>
+        /// Setup UI And initialize wave
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator LaunchGame()
         {
             _game.Display = "Start Game";
@@ -101,10 +101,15 @@ namespace Assets.Scripts.Process.GunClub.Game
             _currentWave.InitializeLevel();
         }
 
+        /// <summary>
+        /// Change the wave or detect end of game
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator DisplayNextWave()
         {
             yield return new WaitForSeconds(2);
 
+            // Check end of game
             if (_waves.Count - 1 <= _currentLevel)
             {
                 Debug.Log("End of the game");
@@ -115,6 +120,7 @@ namespace Assets.Scripts.Process.GunClub.Game
 
                 _game.EndGame();
             }
+            // Go next wave
             else
             {
                 _game.Display = "Next Wave";
@@ -132,5 +138,7 @@ namespace Assets.Scripts.Process.GunClub.Game
             }
 
         }
+
+        #endregion
     }
 }

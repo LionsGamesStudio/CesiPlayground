@@ -11,6 +11,10 @@ public class TabsManager : MonoBehaviour
         ChangeTab(0);
     }
 
+    /// <summary>
+    /// Change the tab to display
+    /// </summary>
+    /// <param name="index"></param>
     public void ChangeTab(int index)
     {
         foreach (GameObject t in Tabs)

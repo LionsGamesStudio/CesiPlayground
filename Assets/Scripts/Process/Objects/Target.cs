@@ -32,6 +32,11 @@ namespace Assets.Scripts.Process.Object
 
         public int ID { get { return HASH_ID; } }
 
+
+        /// <summary>
+        /// Detect if was hit
+        /// </summary>
+        /// <param name="other"></param>
         private void OnTriggerEnter(Collider other)
         {
             if (!tagHitting.Contains(other.tag)) return;
@@ -55,6 +60,9 @@ namespace Assets.Scripts.Process.Object
             }
         }
 
+        /// <summary>
+        /// Send event to score because target was hit
+        /// </summary>
         private void IsHit()
         {
             OnScoreEvent scoreEvent = new OnScoreEvent();
@@ -66,6 +74,9 @@ namespace Assets.Scripts.Process.Object
             EventBus<OnScoreEvent>.Raise(scoreEvent);
         }
 
+        /// <summary>
+        /// Send a request to dispawn the target
+        /// </summary>
         private void SendDispawnRequest()
         {
             OnDispawnRequestSend request = new OnDispawnRequestSend();

@@ -8,7 +8,14 @@ namespace Assets.Scripts.Core.Wave
 {
     public interface IWave
     {
+        /// <summary>
+        /// Initialize the wave
+        /// </summary>
         public void InitializeLevel();
+
+        /// <summary>
+        /// Reset the wave
+        /// </summary>
         public void ResetLevel();
     }
 }

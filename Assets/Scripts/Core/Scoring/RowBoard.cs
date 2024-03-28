@@ -3,6 +3,9 @@ using System;
 
 namespace Assets.Scripts.Core.Scoring
 {
+    /// <summary>
+    /// Row of a scoreboard
+    /// </summary>
     [Serializable]
     public class RowBoard
     {

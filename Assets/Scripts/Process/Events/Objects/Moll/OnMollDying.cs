@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Process.Events.Objects.MollEvent
 {
+    /// <summary>
+    /// Event sent when a moll die
+    /// </summary>
     public class OnMollDying : IEvent
     {
         public Game Game;

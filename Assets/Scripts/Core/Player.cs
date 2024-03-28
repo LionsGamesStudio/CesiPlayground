@@ -28,7 +28,7 @@ namespace Assets.Scripts.Core
 
         public void Start()
         {
-            // Charging Player
+            #region Charging Player Data
             storagePath = Application.persistentDataPath + "/Player/";
 
             if(!System.IO.Directory.Exists(storagePath))
@@ -48,10 +48,14 @@ namespace Assets.Scripts.Core
                 PlayerData.PlayerName = "Unknown";
                 StorageManager.Store<PlayerData>(jsonName, PlayerData);
             }
+            #endregion
 
-            
         }
 
+        /// <summary>
+        /// Change the name of the player
+        /// </summary>
+        /// <param name="name"></param>
         public void ChangeName(string name)
         {
             storagePath = Application.persistentDataPath + "/Player/";

@@ -11,6 +11,9 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.GameUI
 {
+    /// <summary>
+    /// Button to start a game
+    /// </summary>
     [RequireComponent(typeof(Button))]
     public class StartGameButton : MonoBehaviour
     {

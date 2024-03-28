@@ -43,6 +43,8 @@ namespace Assets.Scripts.Core.Game
             EventBus<OnScoreEvent>.Register(_scoreEventBinding);
         }
 
+        #region Game Steps
+
         /// <summary>
         /// Start the logic of the game which is in the strategy
         /// </summary>
@@ -57,6 +59,9 @@ namespace Assets.Scripts.Core.Game
             }  
         }
 
+        /// <summary>
+        /// Reset the game
+        /// </summary>
         public void ResetGame()
         {
             if (!_startedGame)
@@ -86,6 +91,12 @@ namespace Assets.Scripts.Core.Game
             }
         }
 
+        #endregion
+
+        /// <summary>
+        /// Send final score on the game to the corresponding scoreboard
+        /// </summary>
+        /// <param name="scoreEvent"></param>
         private void OnScoreEvent(OnScoreEvent scoreEvent)
         {
             if (scoreEvent.GameId == Data.GameId && scoreEvent.PlayerData.PlayerId == CurrentPlayer.PlayerData.PlayerId)
@@ -95,7 +106,8 @@ namespace Assets.Scripts.Core.Game
             }
         }
 
-        // GETTERS AND SETTERS
+        #region Getters and Setters
+
         public bool StartedGame
         {
             get { return _startedGame; }
@@ -123,5 +135,6 @@ namespace Assets.Scripts.Core.Game
             }
         }
 
+        #endregion
     }
 }

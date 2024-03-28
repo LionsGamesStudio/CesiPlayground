@@ -38,6 +38,8 @@ namespace Assets.Scripts.Process.MollSmash.Game
             EventBus<OnMollDying>.Register(_onMollDying);
         }
 
+        #region Strategy
+
         public void EndGame()
         {
             _difficulty = null;
@@ -67,6 +69,12 @@ namespace Assets.Scripts.Process.MollSmash.Game
 
         }
 
+        #endregion
+
+        /// <summary>
+        /// Set the difficulty
+        /// </summary>
+        /// <param name="difficulty"></param>
         public void SetDifficulty(MollSmashDifficulty difficulty)
         {
             switch (difficulty)
@@ -86,6 +94,12 @@ namespace Assets.Scripts.Process.MollSmash.Game
             }
         }
 
+        #region Logic
+
+        /// <summary>
+        /// Setup UI and start loop
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator LaunchGame()
         {
             _game.Display = "Start Game";
@@ -98,6 +112,10 @@ namespace Assets.Scripts.Process.MollSmash.Game
             _game.StartCoroutine(Update());
         }
 
+        /// <summary>
+        /// Loop to summon moll until life is down
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator Update()
         {
             float difficulty = _difficulty.DifficultyMultiplier;
@@ -138,6 +156,14 @@ namespace Assets.Scripts.Process.MollSmash.Game
             _game.EndGame();
         }
 
+        #endregion
+
+        #region Event
+
+        /// <summary>
+        /// Dispawn moll when dying
+        /// </summary>
+        /// <param name="e"></param>
         private void OnMollDying(OnMollDying e)
         {
             _life -= e.Damage;
@@ -151,5 +177,7 @@ namespace Assets.Scripts.Process.MollSmash.Game
 
             EventBus<OnDispawnRequestSend>.Raise(request);
         }
+
+        #endregion
     }
 }

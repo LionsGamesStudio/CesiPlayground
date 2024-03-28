@@ -34,7 +34,11 @@ namespace Assets.Scripts.Process.Objects.Targets
             EventBus<OnMollBirth>.Register(_onMollBirth);
         }
 
-        public IEnumerator Loop()
+        /// <summary>
+        /// Logic of the moll
+        /// </summary>
+        /// <returns></returns>
+        public virtual IEnumerator Loop()
         {
             while(true)
             {
@@ -75,6 +79,12 @@ namespace Assets.Scripts.Process.Objects.Targets
             }
         }
 
+        #region Positioning
+
+        /// <summary>
+        /// Make the moll go outside
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator GoOutside()
         {
             transform.position += new Vector3(0, YToOutside, 0);
@@ -83,6 +93,10 @@ namespace Assets.Scripts.Process.Objects.Targets
             yield return new WaitForSeconds(1);
         }
 
+        /// <summary>
+        /// Make the moll go back inside
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator GoInside()
         {
             transform.position -= new Vector3(0, YToOutside, 0);
@@ -91,6 +105,12 @@ namespace Assets.Scripts.Process.Objects.Targets
             yield return new WaitForSeconds(1);
         }
 
+        #endregion
+
+        /// <summary>
+        /// Event to get data on birth
+        /// </summary>
+        /// <param name="e"></param>
         private void OnMollBirth(OnMollBirth e)
         {
             if(e.IdMoll == ID)

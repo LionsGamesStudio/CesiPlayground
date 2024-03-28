@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Utilities
 {
+    /// <summary>
+    /// Create a keyboard when click on TMP_Input. To Place on TMP_Input.
+    /// </summary>
     public class ShowKeyboardUI : MonoBehaviour
     {
         private TMP_InputField inputField;

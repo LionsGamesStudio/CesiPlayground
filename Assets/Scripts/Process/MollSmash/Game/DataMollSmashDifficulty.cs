@@ -14,15 +14,16 @@ namespace Assets.Scripts.Process.MollSmash.Game
         public int LifePoint;
         public List<GameObject> PrefabsMolls;
 
-        [Range(0f, 1f)]
+        [Range(0f, 1f), Tooltip("Multiplier to make the game more or less difficult (the more it is low, the more it is difficult)")]
         public float DifficultyMultiplier;
 
-        [Range(0f, 1f)]
+        [Range(0f, 1f), Tooltip("The amont to decrease the multiplier to make it more difficult as the game go on")]
         public float MultiplierReducer;
 
+        [Tooltip("Curve describing the amount of enemy to spawn through the game as the time pass")]
         public AnimationCurve NumberOfEnnemies;
 
-        [Range(0f, 100f)]
+        [Range(0f, 100f), Tooltip("The rate of moll going outside")]
         public int GoOutsideRate;
     }
 }
