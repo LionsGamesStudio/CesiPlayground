@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &42311708090885000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 328434377501347968, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_Name
+      value: AutumnSappling
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136321074163534394, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3142646789217081438, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a32ab8cd6c1c9fd45b95b4084f50ac0e, type: 2}
+    - target: {fileID: 6305723564530510573, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a32ab8cd6c1c9fd45b95b4084f50ac0e, type: 2}
+    - target: {fileID: 6625211202110073138, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 948758da3178ac74284a06f5d76ba6ea, type: 2}
+    - target: {fileID: 6711140839744811493, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a32ab8cd6c1c9fd45b95b4084f50ac0e, type: 2}
+    - target: {fileID: 8839416890358759074, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a32ab8cd6c1c9fd45b95b4084f50ac0e, type: 2}
+    - target: {fileID: 8960528395704022490, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a32ab8cd6c1c9fd45b95b4084f50ac0e, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 328434377501347968, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4929704209400470477}
+  m_SourcePrefab: {fileID: 100100000, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+--- !u!1 &295134302950552328 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 328434377501347968, guid: fc4f76926519ba24eb91fa727fbe5030, type: 3}
+  m_PrefabInstance: {fileID: 42311708090885000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!193 &4929704209400470477
+Tree:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295134302950552328}
+  m_SpeedTreeWindAsset: {fileID: 0}
+  m_TreeData: {fileID: 2843019402605479973, guid: 169b0d4c0a9dbf54ea1ebc2c1b2f94d2, type: 3}
