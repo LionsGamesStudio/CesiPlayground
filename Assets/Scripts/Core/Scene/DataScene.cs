@@ -14,6 +14,8 @@ namespace Assets.Scripts.Core.Scene
         public bool _isMainScene = false;
         public bool _hasOneInstance = false;
 
+#if UNITY_EDITOR
+
         private void OnDisable()
         {
             EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
@@ -31,5 +33,6 @@ namespace Assets.Scripts.Core.Scene
                 _hasOneInstance = false;
             }
         }
+#endif
     }
 }
