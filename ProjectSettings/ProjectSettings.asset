@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: Lions-Games-1
+  companyName: LionsGamesStudio
+  productName: CesiPlayground
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.12156863, g: 0.12156863, b: 0.1254902, a: 1}
@@ -136,10 +136,12 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 1.0
+  bundleVersion: 0.0.1
   preloadedAssets:
-  - {fileID: -6517218471499782410, guid: 1a4c68ca72a83449f938d669337cb305, type: 2}
-  - {fileID: -513204249778910490, guid: 9ffb8c1804147d04b83ebe9eace4e62e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 2948084910759640535, guid: 18ae7326638e9c34db228e93e5c4d67b, type: 2}
+  - {fileID: 1248604231256271781, guid: 893e64bc02f5e2f4db547c52dfc013e5, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -160,7 +162,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.Lions-Games-1
+    Standalone: com.LionsGamesStudio.CesiPlayground
   buildNumber:
     Standalone: 0
     VisionOS: 0
