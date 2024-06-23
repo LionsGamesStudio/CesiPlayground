@@ -13,7 +13,7 @@ namespace Assets.Scripts.Core.Game
         private static int _numberOfInstance = 0;
 
         private bool _startedGame = false;
-        private int _score = 0;
+        private float _score = 0;
         private string _displayText = "Score : 0";
 
         private EventBinding<OnScoreEvent> _scoreEventBinding;
@@ -114,7 +114,7 @@ namespace Assets.Scripts.Core.Game
             set { _startedGame = value; }
         }
 
-        public int Score
+        public float Score
         {
             get { return _score; }
             set { _score = value; }

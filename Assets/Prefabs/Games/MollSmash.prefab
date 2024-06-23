@@ -924,6 +924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8492193965647034821}
   - component: {fileID: 4600889605700988562}
+  - component: {fileID: 1803632398612837550}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1008,6 +1009,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1803632398612837550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7515143358333289972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &8247761859016245067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1311,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1675756726552502453}
     m_Modifications:
+    - target: {fileID: 656956302979924972, guid: cb7887542cf67d144aa6e9f1aaa4c783, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeDifficultyMollSmash
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669490986631479789, guid: cb7887542cf67d144aa6e9f1aaa4c783, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeDifficultyMollSmash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561954673406695909, guid: cb7887542cf67d144aa6e9f1aaa4c783, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeDifficultyMollSmash
+      objectReference: {fileID: 0}
     - target: {fileID: 4742246093708404588, guid: cb7887542cf67d144aa6e9f1aaa4c783, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1566,7 +1602,7 @@ PrefabInstance:
     - target: {fileID: 23233276633784552, guid: e0b1f68500561d34cab11357e0b27526, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b858de4ee80d3a14788239ad2d842408, type: 2}
+      objectReference: {fileID: 2100000, guid: 10593393f845ef245bd0d401ceef0316, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

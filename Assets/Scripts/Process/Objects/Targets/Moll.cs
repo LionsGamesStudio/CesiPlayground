@@ -1,4 +1,7 @@
-﻿using Assets.Scripts.Core.Events;
+﻿using Assets.Scripts.Core.AI.BehaviourTrees;
+using Assets.Scripts.Core.AI.BehaviourTrees.Nodes;
+using Assets.Scripts.Core.Events;
+using Assets.Scripts.Process.AI;
 using Assets.Scripts.Process.Events.Objects.MollEvent;
 using Assets.Scripts.Process.Object;
 using System.Collections;
@@ -6,24 +9,23 @@ using UnityEngine;
 
 namespace Assets.Scripts.Process.Objects.Targets
 {
+    [RequireComponent(typeof(Assets.Scripts.Core.AI.BehaviourTrees.Tree))]
     public class Moll : Target
     {
         [Header("Data")]
         public int Damage;
-        public float TimeOutside;
-        public float TimeAlive;
+        public float TimeToLive;
+        public float WaitTime;
 
         public Collider HitZone;
 
         [Header("Effect")]
         public GameObject EffectOnDying;
-        public float YToOutside;
 
-        private float _timeAlreadyPassedOutside = 0;
-        private float _timeAlreadyPassedAlive = 0;
-
+        private BaseMollBT _tree;
+        private float _timeLived = 0;
         private float _multiplier = 1;
-        private int _outsideRate;
+        private Vector3 _spawnPos;
 
         private EventBinding<OnMollBirth> _onMollBirth;
 
@@ -32,80 +34,43 @@ namespace Assets.Scripts.Process.Objects.Targets
             base.Awake();
             _onMollBirth = new EventBinding<OnMollBirth>(OnMollBirth);
             EventBus<OnMollBirth>.Register(_onMollBirth);
+
+            _tree = GetComponent<BaseMollBT>();
+
+            // Don't activate the tree until the moll is born
+            _tree.enabled = false;
         }
 
-        /// <summary>
-        /// Logic of the moll
-        /// </summary>
-        /// <returns></returns>
-        public virtual IEnumerator Loop()
+        public void Update()
         {
-            while(true)
+            _timeLived += Time.deltaTime;
+            if (_timeLived >= TimeToLive)
             {
-                _timeAlreadyPassedAlive += Time.deltaTime;
+                OnMollDying onMollDying = new OnMollDying();
+                onMollDying.Game = this.game;
+                onMollDying.Moll = gameObject;
+                onMollDying.Damage = Damage * _multiplier;
 
-                if (IsOutside)
-                    _timeAlreadyPassedOutside += Time.deltaTime;
+                EventBus<OnMollDying>.Raise(onMollDying);
 
-                if (_timeAlreadyPassedOutside >= TimeOutside * _multiplier && IsOutside)
+                foreach (Transform pos in _tree.WaypointsUsed)
                 {
-                    IsOutside = false;
-                    yield return StartCoroutine(GoInside());
-                }
-
-                // Determine if go outside or not
-                float outsideRatePick = Random.Range(0, 100);
-                bool goOutside = outsideRatePick < _outsideRate * _multiplier;
-
-                if (goOutside && !IsOutside)
-                {
-                    IsOutside = true;
-                    _timeAlreadyPassedOutside = 0;
-                    yield return StartCoroutine(GoOutside());
-                }
-
-                if (_timeAlreadyPassedAlive >= TimeAlive * _multiplier && !IsOutside)
-                {
-                    OnMollDying onMollDying = new OnMollDying();
-                    onMollDying.Game = this.game;
-                    onMollDying.Moll = gameObject;
-                    onMollDying.Damage = Damage / _multiplier;
-
-                    EventBus<OnMollDying>.Raise(onMollDying);
-
-                    StopCoroutine(Loop());
-                    break;
+                    if (pos != _tree.SpawnPosition)
+                    {
+                        Destroy(pos.gameObject);
+                    }
                 }
             }
+
+            if(transform.position == _spawnPos)
+            {
+                HitZone.enabled = false;
+            }
+            else
+            {
+                HitZone.enabled = true;
+            }
         }
-
-        #region Positioning
-
-        /// <summary>
-        /// Make the moll go outside
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerator GoOutside()
-        {
-            transform.position += new Vector3(0, YToOutside, 0);
-            HitZone.enabled = true;
-
-            yield return new WaitForSeconds(1);
-        }
-
-        /// <summary>
-        /// Make the moll go back inside
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerator GoInside()
-        {
-            transform.position -= new Vector3(0, YToOutside, 0);
-            HitZone.enabled = false;
-
-            yield return new WaitForSeconds(1);
-        }
-
-        #endregion
 
         /// <summary>
         /// Event to get data on birth
@@ -115,17 +80,18 @@ namespace Assets.Scripts.Process.Objects.Targets
         {
             if(e.IdMoll == ID)
             {
-                _multiplier = e.Multiplier;
-                _outsideRate = e.OutsideRate;
                 game = e.Game;
+                _tree.Waypoints = e.Waypoints;
+                _tree.SpawnPosition = e.SpawnPosition;
+                _tree.Speed *= e.Multiplier;
+                _tree.WaitTime = WaitTime * e.Multiplier;
+                _tree.enabled = true;
 
-                StartCoroutine(Loop());
+                _multiplier = e.Multiplier;
+                score *= e.Multiplier;
+
+                _spawnPos = e.SpawnPosition.position;
             }
-        }
-
-        public bool IsOutside
-        {
-            get; set;
         }
     }
 }

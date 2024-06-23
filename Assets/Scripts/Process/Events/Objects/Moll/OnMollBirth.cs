@@ -12,6 +12,7 @@ namespace Assets.Scripts.Process.Events.Objects.MollEvent
         public Game Game;
         public int IdMoll;
         public float Multiplier;
-        public int OutsideRate;
+        public Transform[] Waypoints;
+        public Transform SpawnPosition;
     }
 }

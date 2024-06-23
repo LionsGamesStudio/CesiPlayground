@@ -12,9 +12,9 @@ namespace Assets.Scripts.Core.Scoring
         public int Pos;
         public string HashID;
         public string PlayerName;
-        public int Score;
+        public float Score;
         
-        public RowBoard(int pos, string playerName, int score)
+        public RowBoard(int pos, string playerName, float score)
         {
             HashID = Guid.NewGuid().ToString();
             Pos = pos;
@@ -23,7 +23,7 @@ namespace Assets.Scripts.Core.Scoring
         }
 
         [JsonConstructor]
-        public RowBoard(int pos, string id, string playerName, int score)
+        public RowBoard(int pos, string id, string playerName, float score)
         {
             HashID = id;
             Pos = pos;

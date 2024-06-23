@@ -15,6 +15,6 @@ namespace Assets.Scripts.Process.Events
     {
         public string GameId;
         public Player Player;
-        public int Score;
+        public float Score;
     }
 }

@@ -119,34 +119,18 @@ namespace Assets.Scripts.Process.MollSmash.Game
         private IEnumerator Update()
         {
             float difficulty = _difficulty.DifficultyMultiplier;
+            float spawnRate = _difficulty.SpawnRate;
 
-            while(_life > 0)
+            while (_life > 0)
             {
-                int numberOfTargetToSpawn = (int)_difficulty.NumberOfEnnemies.Evaluate(Time.deltaTime);
-
-                for (int i = 0; i < numberOfTargetToSpawn; i++)
+                bool spawn = UnityEngine.Random.Range(0, 100) < _difficulty.SpawnRate;
+                if (spawn)
                 {
-                    if(_game.Spawner.PositionsAvailable.Count <= 0) break;
-
-                    int randomTargetIndex = UnityEngine.Random.Range(0, _difficulty.PrefabsMolls.Count);
-                    int randomPositionIndex = UnityEngine.Random.Range(0, _game.Spawner.PositionsAvailable.Count);
-                    GameObject _target = _game.Spawner.Spawn<GameObject>(randomPositionIndex, _difficulty.PrefabsMolls[randomTargetIndex]);
-
-                    if (_target != null)
-                    {
-                        OnMollBirth onMollBirth = new OnMollBirth();
-                        onMollBirth.Multiplier = difficulty;
-                        onMollBirth.IdMoll = _target.GetComponent<Target>().ID;
-                        onMollBirth.OutsideRate = _difficulty.GoOutsideRate;
-                        onMollBirth.Game = _game;
-
-                        EventBus<OnMollBirth>.Raise(onMollBirth);
-                    }
+                    SpawnAMoll(difficulty, _difficulty.PrefabsMolls, _game.Spawner.PositionsAvailable);
                 }
 
-                yield return new WaitUntil(() => _game.Spawner.SpawnPosibilitiesAlreadyUsed.Count <= 0);
-                float nextDiff = difficulty - (_difficulty.MultiplierReducer * UnityEngine.Random.Range(1, 10));
-                difficulty = Mathf.Max(nextDiff, 0.01f, nextDiff);
+                // The more the game is difficult, the more molls are spawned
+                yield return new WaitForSeconds(1/difficulty);
             }
 
             _game.Display = "End of the game";
@@ -154,6 +138,35 @@ namespace Assets.Scripts.Process.MollSmash.Game
             yield return new WaitForSeconds(2);
 
             _game.EndGame();
+        }
+
+        /// <summary>
+        /// Spawn a moll
+        /// </summary>
+        /// <param name="difficultyMultiplier"></param>
+        /// <param name="prefabsMolls"></param>
+        /// <param name="positionsAvailable"></param>
+        private void SpawnAMoll(float difficultyMultiplier, List<GameObject> prefabsMolls, List<Transform> positionsAvailable)
+        {
+            if (_game.Spawner.PositionsAvailable.Count <= 0) return;
+
+            int randomTargetIndex = UnityEngine.Random.Range(0, prefabsMolls.Count);
+            int randomPositionIndex = UnityEngine.Random.Range(0, positionsAvailable.Count);
+            Transform randomPosition = positionsAvailable[randomPositionIndex];
+            GameObject _target = _game.Spawner.Spawn<GameObject>(randomPositionIndex, prefabsMolls[randomTargetIndex]);
+
+            if (_target != null)
+            {
+                OnMollBirth onMollBirth = new OnMollBirth();
+                onMollBirth.Multiplier = difficultyMultiplier;
+                onMollBirth.IdMoll = _target.GetComponent<Target>().ID;
+                onMollBirth.Game = _game;
+                onMollBirth.Waypoints = positionsAvailable.ToArray();
+                onMollBirth.SpawnPosition = randomPosition;
+
+
+                EventBus<OnMollBirth>.Raise(onMollBirth);
+            }
         }
 
         #endregion

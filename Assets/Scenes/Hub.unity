@@ -10356,15 +10356,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 9eb90f09d2dfd4b4e97b81f8c9f75a14, type: 2}
     - target: {fileID: 7377448764568521498, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.290002
+      value: -21.47
       objectReference: {fileID: 0}
     - target: {fileID: 7377448764568521498, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.68
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7377448764568521498, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -75.67999
+      value: -0.86
       objectReference: {fileID: 0}
     - target: {fileID: 7377448764568521498, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10397,6 +10397,10 @@ PrefabInstance:
     - target: {fileID: 7654849419043031569, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_Name
       value: MollSmashBeacon1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654849419043031569, guid: 912afda0c5640a246a50a43de5339308, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22536,6 +22540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerXR
       objectReference: {fileID: 0}
+    - target: {fileID: 2894750569128202085, guid: 55201a59068a8294a9c6496089f39457, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3234460880887688109, guid: 55201a59068a8294a9c6496089f39457, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -26223,15 +26231,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7377448764568521498, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.4
+      value: -9.88
       objectReference: {fileID: 0}
     - target: {fileID: 7377448764568521498, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.68
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7377448764568521498, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -64.92
+      value: -21.54
       objectReference: {fileID: 0}
     - target: {fileID: 7377448764568521498, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26264,6 +26272,10 @@ PrefabInstance:
     - target: {fileID: 7654849419043031569, guid: 912afda0c5640a246a50a43de5339308, type: 3}
       propertyPath: m_Name
       value: GunClubBeacon1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654849419043031569, guid: 912afda0c5640a246a50a43de5339308, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

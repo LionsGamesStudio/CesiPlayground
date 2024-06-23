@@ -16,39 +16,5 @@ MonoBehaviour:
   LifePoint: 800
   PrefabsMolls:
   - {fileID: 5271164571076807960, guid: 6cf78f87797ec2849893c917214ff134, type: 3}
-  DifficultyMultiplier: 0.5
-  MultiplierReducer: 0.007
-  NumberOfEnnemies:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0059165955
-      value: 1.0021667
-      inSlope: 0.0006126126
-      outSlope: 0.0006126126
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 13156.705
-      value: 9.062126
-      inSlope: 0.0000009797823
-      outSlope: 0.0000009797823
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.08368323
-    - serializedVersion: 3
-      time: 414542.34
-      value: 8.911086
-      inSlope: 0.00000048018484
-      outSlope: 0.00000048018484
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.0888669
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  GoOutsideRate: 50
+  SpawnRate: 50
+  DifficultyMultiplier: 1.5

@@ -15,6 +15,6 @@ namespace Assets.Scripts.Process.Events
     {
         public string GameId;
         public PlayerData PlayerData = new PlayerData();
-        public int Points;
+        public float Points;
     }
 }

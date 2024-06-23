@@ -1,4 +1,5 @@
 using Assets.Scripts.Core;
+using Assets.Scripts.Core.AI.BehaviourTrees;
 using Assets.Scripts.Core.Events;
 using Assets.Scripts.Core.Game;
 using Assets.Scripts.Core.Spawn.Spawners;
@@ -7,7 +8,6 @@ using Assets.Scripts.Utilities.Sound;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Process.Object
 {
@@ -15,7 +15,7 @@ namespace Assets.Scripts.Process.Object
     public class Target : MonoBehaviour
     {
         public Game game;
-        public int score;
+        public float score;
 
         public List<string> tagHitting = new List<string>();
         public GameObject effectOnDestroy;
