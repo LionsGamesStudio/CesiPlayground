@@ -18,22 +18,25 @@ namespace Assets.Scripts.Core.AI.BehaviourTrees.Nodes.SpecificNodes
         // Patrol variables
         private int _currentWaypointIndex = 0;
         private float _speed = 1.0f;
+        private bool _rotateToward = true;
 
         private float _waitTime = 1.0f;
         private float _waitCounter = 0.0f;
         private bool _waiting = false;
 
 
-        public TaskPatrol(Transform transform, Transform[] waypoints, float speed, float waitTime) : base()
+        public TaskPatrol(Transform transform, Transform[] waypoints, float speed, float waitTime, bool rotateToward) : base()
         {
             _transform = transform;
             _waypoints = waypoints;
             _speed = speed;
             _waitTime = waitTime;
+            _rotateToward = rotateToward;
         }
 
         public override NodeState Evaluate()
         {
+            Debug.Log(_waiting);
             if (_waiting)
             {
                 _waitCounter += Time.deltaTime;
@@ -54,7 +57,8 @@ namespace Assets.Scripts.Core.AI.BehaviourTrees.Nodes.SpecificNodes
                 else
                 {
                     _transform.position = Vector3.MoveTowards(_transform.position, wp.position, _speed * Time.deltaTime);
-                    _transform.LookAt(wp.position);
+                    if (_rotateToward)
+                        _transform.LookAt(wp.position);
                 }
             }
 

@@ -15,14 +15,10 @@ namespace Assets.Scripts.Process.AI
         public float Speed;
         public float WaitTime;
 
-        private int HASH_ID;
         private UnityEngine.Transform[] _waypointsUsed;
 
         protected override Node SetupTree()
         {
-            gameObject.layer = 9;
-            HASH_ID = Guid.NewGuid().GetHashCode();
-
             _waypointsUsed = new UnityEngine.Transform[2];
             _waypointsUsed[0] = new UnityEngine.GameObject().transform;
             _waypointsUsed[0].position = SpawnPosition.position;
@@ -31,7 +27,7 @@ namespace Assets.Scripts.Process.AI
             transformUp.position = new UnityEngine.Vector3(SpawnPosition.position.x, SpawnPosition.position.y + 0.5f, SpawnPosition.position.z);
             _waypointsUsed[1] = transformUp;
 
-            Node root = new TaskPatrol(gameObject.transform, _waypointsUsed, Speed, WaitTime);
+            Node root = new TaskPatrol(gameObject.transform, _waypointsUsed, Speed, WaitTime, true);
 
             return root;
         }

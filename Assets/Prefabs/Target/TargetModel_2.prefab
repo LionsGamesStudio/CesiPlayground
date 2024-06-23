@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 361844982140038192}
   - component: {fileID: 7493269972551288565}
   - component: {fileID: 7042251386586705828}
+  - component: {fileID: 1143485651956652763}
   m_Layer: 8
   m_Name: TargetModel_2
   m_TagString: Untagged
@@ -72,6 +73,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.76, y: 0.77313167, z: 0.5}
   m_Center: {x: -0.008554816, y: -0.0025031865, z: -0.004277315}
+--- !u!114 &1143485651956652763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501340564559270100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66518cfa95c4a8419be7ef32c612bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Waypoints: []
+  Speed: 1
+  WaitTime: 0.5
+  DistanceToMove: 2
 --- !u!1001 &3917753340132146014
 PrefabInstance:
   m_ObjectHideFlags: 0
