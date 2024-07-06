@@ -87,7 +87,6 @@ namespace Assets.Scripts.Core
                 InputType = XRInputType.Parameters
             });
 
-            Debug.Log(XRGlobalManager.GetEvents(XRHand.Secondary).Count);
         }
 
         /// <summary>
