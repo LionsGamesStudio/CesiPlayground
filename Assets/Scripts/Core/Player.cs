@@ -1,4 +1,7 @@
-﻿using Assets.Scripts.Core.Storing;
+﻿using Assets.Scripts.Core.Events.XR;
+using Assets.Scripts.Core.Parameters;
+using Assets.Scripts.Core.Storing;
+using Assets.Scripts.Core.XR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +20,42 @@ namespace Assets.Scripts.Core
         [Header("Storage")]
         public StorageManager StorageManager;
 
-        
+        [Header("XR")]
+        public XRGlobalManager XRGlobalManager;
+
+        [Header("Parameters")]
+        public Parameter Parameter;
 
         [NonSerialized]
         public PlayerData PlayerData;
 
+
+
         private string storagePath;
         private string jsonName;
 
+        public void Awake()
+        {
+            if(StorageManager == null)
+            {
+                throw new Exception("Storage Manager is not set");
+            }
+
+            if (XRGlobalManager == null)
+            {
+                throw new Exception("XR Global Manager is not set");
+            }
+
+            if (Parameter == null)
+            {
+                throw new Exception("Parameter is not set");
+            }
+        }
 
         public void Start()
         {
             #region Charging Player Data
+
             storagePath = Application.persistentDataPath + "/Player/";
 
             if(!System.IO.Directory.Exists(storagePath))
@@ -48,8 +75,19 @@ namespace Assets.Scripts.Core
                 PlayerData.PlayerName = "Unknown";
                 StorageManager.Store<PlayerData>(jsonName, PlayerData);
             }
+
             #endregion
 
+
+            // Register the toggle parameter event
+            XRGlobalManager.RegisterXRInputEvent(new RegisterXRInputEvent()
+            {
+                Hand = XRHand.Secondary,
+                InputAction = Parameter.ToggleParam,
+                InputType = XRInputType.Parameters
+            });
+
+            Debug.Log(XRGlobalManager.GetEvents(XRHand.Secondary).Count);
         }
 
         /// <summary>

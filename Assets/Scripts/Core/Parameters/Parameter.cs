@@ -14,24 +14,17 @@ namespace Assets.Scripts.Core.Parameters
         public Camera XRCamera;
 
         [Header("Parameters")]
-        public InputActionReference ParameterInput;
         public GameObject ParametersWindow;
 
         [Header("Scoreboards")]
         public ScoreBoardManager ScoreBoardManager;
-
-        public void Awake()
-        {
-            // Input
-            ParameterInput.action.started += ToggleParam;
-        }
 
         public void Update()
         {
             ParametersWindow.transform.rotation = XRCamera.transform.rotation;
         }
 
-        private void ToggleParam(InputAction.CallbackContext call)
+        public void ToggleParam(InputAction.CallbackContext call)
         {
             ParametersWindow.SetActive(!ParametersWindow.activeSelf);
         }
