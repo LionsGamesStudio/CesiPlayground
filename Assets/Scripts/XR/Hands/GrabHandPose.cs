@@ -69,6 +69,9 @@ public class GrabHandPose : MonoBehaviour
         if (arg.interactorObject is XRDirectInteractor)
         {
             HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
+
+            if (handData == null) return;
+
             handData.animator.enabled = true;
                 
             StartCoroutine(SetHandDataRoutine(handData, startingHandPosition, startingHandRotation, startingFingerRotations, finalHandPosition, finalHandRotation, finalFingerRotations));

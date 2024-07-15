@@ -1,12 +1,12 @@
-﻿using Assets.Scripts.Core.Game;
-using Assets.Scripts.Process.MollSmash.Game;
+﻿using Assets.Scripts.Core.Games;
+using Assets.Scripts.Process.MollSmash.Main;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using static Assets.Scripts.Process.MollSmash.Game.MollSmashStrategy;
+using static Assets.Scripts.Process.MollSmash.Main.MollSmashStrategy;
 
 namespace Assets.Scripts.UI.GameUI.MollSmash
 {
@@ -25,13 +25,13 @@ namespace Assets.Scripts.UI.GameUI.MollSmash
         /// <param name="difficulty">String of the enum name of the difficulty</param>
         public void ChangeDifficultyMollSmash(string difficulty)
         {
-            MollSmashStrategy strat = (MollSmashStrategy)Game.GameStrategy;
+            IGameDifficulty iDifficulty = Game.GameStrategy as IGameDifficulty;
 
-            if(strat != null)
+            if (iDifficulty != null)
             {
-                MollSmashDifficulty dif = (MollSmashDifficulty)Enum.Parse(typeof(MollSmashDifficulty), difficulty);
+                GameDifficulty eDifficulty = (GameDifficulty)Enum.Parse(typeof(GameDifficulty), difficulty);
 
-                strat.SetDifficulty(dif);
+                iDifficulty.SetDifficulty(eDifficulty);
             }
         }
 

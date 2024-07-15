@@ -1,5 +1,5 @@
 using Assets.Scripts.Core.Events;
-using Assets.Scripts.Core.Game;
+using Assets.Scripts.Core.Games;
 using Assets.Scripts.Core.Storing;
 using Assets.Scripts.Process.Events;
 using System;

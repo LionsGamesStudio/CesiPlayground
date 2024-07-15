@@ -114,7 +114,7 @@ Material:
     - _BumpScale: 1
     - _CloudAlpha: 1.27
     - _CloudDensity: 0.5
-    - _CloudPower: 0.38
+    - _CloudPower: 0.5
     - _CloudScale: 120
     - _CloudSpeed: 1
     - _Cutoff: 0.5

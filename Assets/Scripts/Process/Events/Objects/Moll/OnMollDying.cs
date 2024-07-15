@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Core.Events.Interfaces;
-using Assets.Scripts.Core.Game;
+using Assets.Scripts.Core.Games;
 using System;
 using System.Collections.Generic;
 using System.Linq;

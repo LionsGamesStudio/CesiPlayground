@@ -14,7 +14,7 @@ namespace Assets.Scripts.Core.Storing
         /// </summary>
         private IStorage storage;
 
-        public void Start()
+        public void Awake()
         {
             if (StorageFactory == null) return;
 

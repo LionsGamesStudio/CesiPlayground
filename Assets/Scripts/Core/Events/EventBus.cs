@@ -34,6 +34,8 @@ namespace Assets.Scripts.Core.Events
             }
         }
 
+        public static HashSet<IEventBinding<T>> GetBindings() => _bindings;
+
         #endregion
 
         static void Clear() => _bindings.Clear();

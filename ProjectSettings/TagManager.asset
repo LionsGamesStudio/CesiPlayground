@@ -15,14 +15,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - None
   - Water
   - UI
   - Player
   - Interactable
   - PP
   - Target
-  - 
+  - GameZone
   - 
   - 
   - 
