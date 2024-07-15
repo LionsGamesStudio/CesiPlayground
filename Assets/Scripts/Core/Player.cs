@@ -37,8 +37,6 @@ namespace Assets.Scripts.Core
         private string storagePath;
         private string jsonName;
 
-        private Game _gameToPlay;
-
         private EventBinding<InitXRHandEvent> _initXRHandBinding;
 
         public void Awake()
@@ -174,8 +172,6 @@ namespace Assets.Scripts.Core
         private void OnUIPlayerName(UIHoverEventArgs args)
         {
             PlayerNameUI input = args.uiObject.GetComponent<PlayerNameUI>();
-
-            Debug.Log("OnUIPlayerName");
 
             if (input == null)
                 input = args.uiObject.GetComponentInParent<PlayerNameUI>();

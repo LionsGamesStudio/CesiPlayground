@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static Assets.Scripts.Process.MollSmash.Main.MollSmashStrategy;
 
-namespace Assets.Scripts.UI.GameUI.MollSmash
+namespace Assets.Scripts.UI.GameUI
 {
     /// <summary>
     /// UI displaying button to change the difficulty of a game
