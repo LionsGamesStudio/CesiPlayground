@@ -8,4 +8,12 @@
 ## Jeux
 - Jeu de tir
 
+## installation 
+
+### Git lfs 
+liens de telechargement : 
+https://docs.github.com/fr/repositories/working-with-files/managing-large-files/installing-git-large-file-storage
+
+Suivre un fichier : 
+git lfs track "*.psd"
 
