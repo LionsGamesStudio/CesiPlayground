@@ -26,10 +26,12 @@ namespace Assets.Scripts.Core.API
         private HttpClient _client;
 
         protected byte[] _salt;
+        protected StorageManager _storageManager;
 
         public void Awake()
         {
-            _salt = GenerateSalt();
+            if(_salt == null)
+                _salt = GenerateSalt();
         }
 
         /// <summary>

@@ -5203,11 +5203,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ValidateName
+      value: LogIn
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Assets.Scripts.UI.MenuUI.LoginUI, Assembly-CSharp
+      value: Assets.Scripts.UI.MenuUI.LoginUI, Cesiplayground.UI
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5311,8 +5311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3679ddd817fdd174ab07635074b8c263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextBlockPseudo: {fileID: 2896003484842673013}
-  TextBlockPassword: {fileID: 4710182612355541651}
+  _textBlockPseudo: {fileID: 2896003484842673013}
+  _textBlockPassword: {fileID: 4710182612355541651}
 --- !u!1001 &2459310486048282507
 PrefabInstance:
   m_ObjectHideFlags: 0

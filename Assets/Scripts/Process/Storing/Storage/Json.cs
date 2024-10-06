@@ -51,6 +51,11 @@ namespace Assets.Scripts.Process.Storing.Storage
             return objectFromJson;
         }
 
+        public string GetFromObject<T>(T obj) where T : class
+        {
+            return JsonConvert.SerializeObject(obj, settings);
+        }
+
         public void Store<T>(string filepath, T value) where T : class
         {
             string json = JsonConvert.SerializeObject(value, settings);

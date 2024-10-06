@@ -121,6 +121,7 @@ namespace Assets.Scripts.Core.Players
                 {
                     List<PlayerData> players = StorageManager.GetFromString<List<PlayerData>>(e.JSON);
                     Debug.Log("Players: " + players.Count);
+                    Debug.Log(e.JSON);
 
                     if (players != null && players.Count == 1)
                     {

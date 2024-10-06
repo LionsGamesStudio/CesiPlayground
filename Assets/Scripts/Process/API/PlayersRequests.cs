@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Core.API;
 using Assets.Scripts.Core.Events;
 using Assets.Scripts.Core.Events.API;
+using Assets.Scripts.Core.Players;
 using Assets.Scripts.Core.Storing;
 using System;
 using System.Collections.Generic;
@@ -90,10 +91,11 @@ namespace Assets.Scripts.Process.API
                 return;
             }
 
-            password = HashPassword(password, _salt);
+            //password = HashPassword(password, _salt);
 
-            string url = "/" + _tableName + "/" + pseudo + "/" + password;
-            Debug.Log(url);
+            Debug.Log(password);
+
+            string url = "/" + _tableName + "/" + pseudo;
 
             string response = await Get(url);
 
@@ -102,6 +104,21 @@ namespace Assets.Scripts.Process.API
             {
                 return;
             }
+
+            // TODO : Check if the password is correct
+
+            List<PlayerData> datas = _storageManager.GetFromString<List<PlayerData>>(response);
+            string jsonPlayer = "";
+            foreach (PlayerData item in datas)
+            {
+                if (item.PlayerName == pseudo && item.PlayerPassword == password)
+                {
+                    jsonPlayer = _storageManager.GetFromObject<PlayerData>(item);
+                    break;
+                }
+            }
+
+            response = jsonPlayer;
 
             EventBus<OnAPIResponseEvent>.Raise(new OnAPIResponseEvent()
             {

@@ -27,4 +27,12 @@ public interface IStorage
     /// <param name="text">String containing the content</param>
     /// <returns>The content</returns>
     public T GetFromString<T>(string text) where T : class;
+
+    /// <summary>
+    /// Get a content from an object
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public string GetFromObject<T>(T obj) where T : class;
 }
