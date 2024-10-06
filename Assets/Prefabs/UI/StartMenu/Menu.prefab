@@ -5185,6 +5185,34 @@ PrefabInstance:
       propertyPath: _classicColor.r
       value: 0.14901961
       objectReference: {fileID: 0}
+    - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
+      propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
+      propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
+      propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2012283589661703904}
+    - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
+      propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
+      propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateName
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
+      propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Assets.Scripts.UI.MenuUI.LoginUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
+      propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5374742594582482556, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: visuals.Color.a
       value: 1

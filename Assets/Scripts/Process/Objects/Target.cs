@@ -1,9 +1,7 @@
-using Assets.Scripts.Core;
-using Assets.Scripts.Core.AI.BehaviourTrees;
 using Assets.Scripts.Core.Events;
 using Assets.Scripts.Core.Games;
-using Assets.Scripts.Core.Spawn.Spawners;
-using Assets.Scripts.Process.Events;
+using Assets.Scripts.Core.Scoring;
+using Assets.Scripts.Core.Spawn;
 using Assets.Scripts.Utilities.Sound;
 using System;
 using System.Collections.Generic;

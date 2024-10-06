@@ -99,10 +99,13 @@ namespace Assets.Scripts.Core.XR
         /// <returns></returns>
         private NovaUIHoverEvent DetectHover()
         {
-            if(_rayInteractor.IsOverUIGameObject()) return null;
+            // If the ray is over a classic UI element, we don't want to trigger the hover event
+            if (_rayInteractor.IsOverUIGameObject()) return null;
 
+            // If the ray is over a 3D element, we trigger the hover event
             if (_rayInteractor.TryGetCurrent3DRaycastHit(out var raycast))
             {
+                // If the ray is over a Nova block, we trigger the hover event
                 CoreBlock block = raycast.collider.GetComponent<CoreBlock>();
                 if (block != null)
                 {
@@ -111,7 +114,8 @@ namespace Assets.Scripts.Core.XR
                     hoverEventEnter.Interactor = RayInteractor;
                     hoverEventEnter.IsHovering = true;
 
-                    if(_blockHovered != block)
+                    // If the block hovered is different from the previous one, we trigger the hover exit event
+                    if (_blockHovered != block)
                     {
                         NovaUIHoverEvent hoverEventExit = new NovaUIHoverEvent();
                         hoverEventExit.Element = _blockHovered;

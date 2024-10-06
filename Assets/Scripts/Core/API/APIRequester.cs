@@ -32,6 +32,10 @@ namespace Assets.Scripts.Core.API
             _salt = GenerateSalt();
         }
 
+        /// <summary>
+        /// Generate a salt
+        /// </summary>
+        /// <returns></returns>
         protected byte[] GenerateSalt()
         {
             using (var rng = RandomNumberGenerator.Create())
@@ -42,6 +46,9 @@ namespace Assets.Scripts.Core.API
             }
         }
 
+        /// <summary>
+        /// Create a new client
+        /// </summary>
         private void CreateClient()
         {
             if (_client == null)

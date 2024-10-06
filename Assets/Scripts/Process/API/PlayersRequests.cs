@@ -19,6 +19,10 @@ namespace Assets.Scripts.Process.API
 
         #region API Requests
 
+        /// <summary>
+        /// Get all players
+        /// </summary>
+        /// <param name="data"></param>
         public async void GetPlayers(Blackboard data)
         {
             string url = "/" + _tableName;
@@ -39,6 +43,10 @@ namespace Assets.Scripts.Process.API
             });
         }
 
+        /// <summary>
+        /// Get a player by its id
+        /// </summary>
+        /// <param name="data"></param>
         public async void GetPlayerById(Blackboard data)
         {
             int? id = data.Get<int?>("id");
@@ -66,10 +74,16 @@ namespace Assets.Scripts.Process.API
             });
         }
 
+        /// <summary>
+        /// Get a player by its pseudo and password
+        /// </summary>
+        /// <param name="data"></param>
         public async void GetPlayer(Blackboard data)
         {
             string pseudo = data.Get<string>("pseudo");
             string password = data.Get<string>("password");
+
+            Debug.Log(pseudo + " " + password);
 
             if (pseudo == null || password == null)
             {
@@ -97,6 +111,10 @@ namespace Assets.Scripts.Process.API
             });
         }
 
+        /// <summary>
+        /// Create a player
+        /// </summary>
+        /// <param name="data"></param>
         public async void CreatePlayer(Blackboard data)
         {
             string pseudo = data.Get<string>("pseudo");
@@ -149,6 +167,10 @@ namespace Assets.Scripts.Process.API
             });
         }
 
+        /// <summary>
+        /// Update a player
+        /// </summary>
+        /// <param name="data"></param>
         public async void UpdatePlayer(Blackboard data)
         {
             int? id = data.Get<int?>("id");
@@ -181,6 +203,10 @@ namespace Assets.Scripts.Process.API
             });
         }
 
+        /// <summary>
+        /// Delete a player
+        /// </summary>
+        /// <param name="data"></param>
         public async void DeletePlayer(Blackboard data)
         {
             int? id = data.Get<int?>("id");

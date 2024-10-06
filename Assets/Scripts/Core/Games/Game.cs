@@ -1,9 +1,8 @@
 ﻿using Assets.Scripts.Core.Events;
 using Assets.Scripts.Core.Events.Players;
-using Assets.Scripts.Core.Events.UI;
 using Assets.Scripts.Core.Players;
+using Assets.Scripts.Core.Scoring;
 using Assets.Scripts.Core.Spawn.Spawners;
-using Assets.Scripts.Process.Events;
 using System;
 using System.Collections;
 using TMPro;

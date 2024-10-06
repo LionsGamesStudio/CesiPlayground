@@ -1,13 +1,11 @@
 using Assets.Scripts.Core.Events;
 using Assets.Scripts.Core.Games;
-using Assets.Scripts.Core.Gates;
+using Assets.Scripts.Core.Spawn;
 using Assets.Scripts.Core.Spawn.Spawners;
 using Assets.Scripts.Core.Wave;
 using Assets.Scripts.Process.Events;
 using Assets.Scripts.Process.GunClub.Main;
 using Assets.Scripts.Process.Object;
-using Assets.Scripts.Utilities;
-using Assets.Scripts.Utilities.Sound;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;

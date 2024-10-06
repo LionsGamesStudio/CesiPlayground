@@ -1,19 +1,14 @@
 ﻿using Assets.Scripts.Core.Events;
 using Assets.Scripts.Core.Events.UI;
 using Nova;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace Assets.Scripts.Core.UI
 {
-    [Serializable] public class NovaEvent : UnityEvent { }
-
     [RequireComponent(typeof(CoreBlock), typeof(BoxCollider), typeof(Rigidbody))]
     public class NovaButton : MonoBehaviour
     {
@@ -82,6 +77,15 @@ namespace Assets.Scripts.Core.UI
             EventBus<NovaUISelectEvent>.Unregister(_selectBinding);
         }
 
+        #region Getters & Setters
+
+        public NovaEvent OnHoverEnter { get => _onHoverEnter; set => _onHoverEnter = value; }
+        public NovaEvent OnHover { get => _onHover; set => _onHover = value; }
+        public NovaEvent OnHoverExit { get => _onHoverExit; set => _onHoverExit = value; }
+        public NovaEvent OnSelect { get => _onSelect; set => _onSelect = value; }
+
+        #endregion
+
         #region Event Handlers
 
         /// <summary>
@@ -90,6 +94,7 @@ namespace Assets.Scripts.Core.UI
         /// <param name="e"></param>
         private void Hover(NovaUIHoverEvent e)
         {
+            // Check if the button is being hovered over
             if (e.Element == _button && e.IsHovering)
             {
                 if (_newHover)

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Process.Events
+namespace Assets.Scripts.Core.Spawn
 {
     /// <summary>
     /// Event sent to make a spawner dispan an object he spawned

@@ -12,9 +12,13 @@ namespace Assets.Scripts.UI.MenuUI
 {
     public class RegisterUI : MonoBehaviour
     {
+        [Header("Input Texts")]
         public NovaInputText TextBlockPseudo;
         public NovaInputText TextBlockPassword;
 
+        /// <summary>
+        /// Create a new player
+        /// </summary>
         public void ValidateName()
         {
             string newName = TextBlockPseudo.Text;

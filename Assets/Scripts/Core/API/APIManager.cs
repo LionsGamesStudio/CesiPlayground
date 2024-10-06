@@ -22,7 +22,11 @@ namespace Assets.Scripts.Core.API
             EventBus<OnAPIRequestEvent>.Register(_onAPIRequestBinding);
         }
 
-        public void OnAPIRequest(OnAPIRequestEvent e)
+        /// <summary>
+        /// Handle API requests
+        /// </summary>
+        /// <param name="e"></param>
+        private void OnAPIRequest(OnAPIRequestEvent e)
         {
             APIRequester requester = requests.Find(r => r.GetType().Name == e.RequesterName);
             if (requester != null)
@@ -30,7 +34,7 @@ namespace Assets.Scripts.Core.API
                 var method = requester.GetType().GetMethod(e.Method);
                 if (method != null)
                 {
-                    method.Invoke(requester, new object[] { e.Data });
+                    method?.Invoke(requester, new object[] { e.Data });
                 }
                 else
                 {

@@ -1,20 +1,21 @@
-﻿using Assets.Scripts.Core.Players;
+﻿using Assets.Scripts.Core;
 using Assets.Scripts.Core.Events.Interfaces;
+using Assets.Scripts.Core.Players;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Process.Events
+namespace Assets.Scripts.Core.Games
 {
     /// <summary>
-    /// Event sent when scoring
+    /// Event sent when a game is finished
     /// </summary>
-    public class OnScoreEvent : IEvent
+    public class OnGameFinished : IEvent
     {
         public string GameId;
-        public PlayerData PlayerData = new PlayerData();
-        public float Points;
+        public Player Player;
+        public float Score;
     }
 }

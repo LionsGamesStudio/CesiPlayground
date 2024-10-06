@@ -1,0 +1,20 @@
+{
+    "name": "Cesiplayground.Process",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2df9ba4bd80deb04a9ead8e410d25a50",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:fe685ec1767f73d42b749ea8045bfe43",
+        "GUID:dc960734dc080426fa6612f1c5fe95f3",
+        "GUID:869841ee2b8a3a649bd4531c7a25398f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

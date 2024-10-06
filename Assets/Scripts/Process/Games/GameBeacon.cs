@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Core.Games;
+using UnityEngine;
 
-namespace Assets.Scripts.Core.Games
+namespace Assets.Scripts.Process.Games
 {
     /// <summary>
     /// Permit to spawn a game where this object is place

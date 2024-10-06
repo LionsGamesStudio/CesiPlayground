@@ -12,15 +12,38 @@ using UnityEngine;
 
 namespace Assets.Scripts.UI.MenuUI
 {
+    [RequireComponent(typeof(NovaButton))]
     public class LoginUI : MonoBehaviour
     {
-        public NovaInputText TextBlockPseudo;
-        public NovaInputText TextBlockPassword;
+        [Header("Input Texts")]
+        [SerializeField] private NovaInputText _textBlockPseudo;
+        [SerializeField] private NovaInputText _textBlockPassword;
 
-        public void ValidateName()
+        private NovaButton _button;
+
+        private void Awake()
         {
-            string newName = TextBlockPseudo.Text;
-            string password = TextBlockPassword.Text;
+            _button = GetComponent<NovaButton>();
+            if (_button == null)
+            {
+                Debug.LogError("LoginUI requires a NovaButton component to function.");
+            }
+
+            bool hasRegisterLogIn = false;
+
+            foreach (var item in _button.OnSelect.ListSubscribers())
+            {
+                Debug.Log(item);
+            }
+        }
+
+        /// <summary>
+        /// Check if the player exists and if the password is correct and log in
+        /// </summary>
+        public void LogIn()
+        {
+            string newName = _textBlockPseudo.Text;
+            string password = _textBlockPassword.Text;
 
             OnAPIRequestEvent apiRequestEvent = new OnAPIRequestEvent();
             apiRequestEvent.RequesterName = "PlayersRequests";

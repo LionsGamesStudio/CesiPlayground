@@ -1,10 +1,11 @@
 ﻿using Assets.Scripts.Core.Events;
 using Assets.Scripts.Core.Events.Players;
+using Assets.Scripts.Core.Games;
 using Assets.Scripts.Core.Players;
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Core.Games
+namespace Assets.Scripts.Process.Games
 {
     [RequireComponent(typeof(BoxCollider))]
     public class GameZone : MonoBehaviour
