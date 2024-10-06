@@ -1,10 +1,6 @@
 ﻿using Assets.Scripts.Core.Events.Interfaces;
 using Assets.Scripts.Core.Games;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Assets.Scripts.Core.Players;
 
 namespace Assets.Scripts.Core.Events.Players
 {

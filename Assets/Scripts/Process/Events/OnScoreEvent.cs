@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Core;
+﻿using Assets.Scripts.Core.Players;
 using Assets.Scripts.Core.Events.Interfaces;
 using System;
 using System.Collections.Generic;

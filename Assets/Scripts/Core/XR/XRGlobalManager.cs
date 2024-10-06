@@ -34,10 +34,14 @@ namespace Assets.Scripts.Core.XR
         private EventBinding<RegisterXRInteractorUIEvent> _registerXRInteractorUIEvent;
         private EventBinding<UnregisterXRInteractorUIEvent> _unregisterXRInteractorUIEvent;
 
+        private EventBinding<RegisterXRInteractorNovaEvent> _registerXRInteractorNovaEvent;
+        private EventBinding<UnregisterXRInteractorNovaEvent> _unregisterXRInteractorNovaEvent;
+
 
         private List<int> _eventsIds = new List<int>();
         private List<int> _interactorsEventsIds = new List<int>();
         private List<int> _interactorsUIEventsIds = new List<int>();
+        private List<int> _interactorsNovaEventsIds = new List<int>();
 
         public void Awake()
         {
@@ -50,6 +54,9 @@ namespace Assets.Scripts.Core.XR
             _registerXRInteractorUIEvent = new EventBinding<RegisterXRInteractorUIEvent>(RegisterXRInteractorUIEvent);
             _unregisterXRInteractorUIEvent = new EventBinding<UnregisterXRInteractorUIEvent>(UnregisterXRInteractorUIEvent);
 
+            _registerXRInteractorNovaEvent = new EventBinding<RegisterXRInteractorNovaEvent>(RegisterXRInteractorNovaEvent);
+            _unregisterXRInteractorNovaEvent = new EventBinding<UnregisterXRInteractorNovaEvent>(UnregisterXRInteractorNovaEvent);
+
 
             EventBus<RegisterXRInputEvent>.Register(_registerXRInputEvent);
             EventBus<UnregisterXRInputEvent>.Register(_unregisterXRInputEvent);
@@ -57,6 +64,8 @@ namespace Assets.Scripts.Core.XR
             EventBus<UnregisterXRInteractorEvent>.Register(_unregisterXRInteractorEvent);
             EventBus<RegisterXRInteractorUIEvent>.Register(_registerXRInteractorUIEvent);
             EventBus<UnregisterXRInteractorUIEvent>.Register(_unregisterXRInteractorUIEvent);
+            EventBus<RegisterXRInteractorNovaEvent>.Register(_registerXRInteractorNovaEvent);
+            EventBus<UnregisterXRInteractorNovaEvent>.Register(_unregisterXRInteractorNovaEvent);
 
         }
 
@@ -206,6 +215,24 @@ namespace Assets.Scripts.Core.XR
         }
 
         /// <summary>
+        /// Register the interactor nova event with the given callback and interactor event
+        /// </summary>
+        /// <param name="e"></param>
+        private void RegisterXRInteractorNovaEvent(RegisterXRInteractorNovaEvent e)
+        {
+            int id;
+            if (e.Hand == XRHand.Primary)
+            {
+                id = PrimaryHand.RegisterNova(e.Callback, e.XRInteractorEvent);
+            }
+            else
+            {
+                id = SecondaryHand.RegisterNova(e.Callback, e.XRInteractorEvent);
+            }
+            _interactorsNovaEventsIds.Add(id);
+        }
+
+        /// <summary>
         /// Unregister the interactor event with the given id
         /// </summary>
         /// <param name="e"></param>
@@ -237,6 +264,23 @@ namespace Assets.Scripts.Core.XR
                 SecondaryHand.UnregisterUI(e.Id, e.XRInteractorEvent);
             }
             _interactorsUIEventsIds.Remove(e.Id);
+        }
+
+        /// <summary>
+        /// Unregister the interactor nova event with the given id
+        /// </summary>
+        /// <param name="e"></param>
+        private void UnregisterXRInteractorNovaEvent(UnregisterXRInteractorNovaEvent e)
+        {
+            if (e.Hand == XRHand.Primary)
+            {
+                PrimaryHand.UnregisterNova(e.Id, e.XRInteractorEvent);
+            }
+            else
+            {
+                SecondaryHand.UnregisterNova(e.Id, e.XRInteractorEvent);
+            }
+            _interactorsNovaEventsIds.Remove(e.Id);
         }
 
         /// <summary>
@@ -272,6 +316,24 @@ namespace Assets.Scripts.Core.XR
             else
             {
                 return SecondaryHand.GetUIEvent(id);
+            }
+        }
+
+        /// <summary>
+        /// Get the interactor nova event with the given id and hand
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="hand"></param>
+        /// <returns></returns>
+        private (int, UnityAction<NovaUIHoverEvent>, XRInteractorType, XRInteractorEvent) GetInteractorNovaEvent(int id, XRHand hand)
+        {
+            if (hand == XRHand.Primary)
+            {
+                return PrimaryHand.GetNovaEvent(id);
+            }
+            else
+            {
+                return SecondaryHand.GetNovaEvent(id);
             }
         }
 
@@ -320,6 +382,31 @@ namespace Assets.Scripts.Core.XR
                 foreach (var id in _interactorsUIEventsIds)
                 {
                     events.Add(GetInteractorUIEvent(id, XRHand.Secondary));
+                }
+            }
+            return events;
+        }
+
+        /// <summary>
+        /// Get all interactor nova events for the given hand
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <returns></returns>
+        private List<(int, UnityAction<NovaUIHoverEvent>, XRInteractorType, XRInteractorEvent)> GetInteractorNovaEvents(XRHand hand)
+        {
+            List<(int, UnityAction<NovaUIHoverEvent>, XRInteractorType, XRInteractorEvent)> events = new List<(int, UnityAction<NovaUIHoverEvent>, XRInteractorType, XRInteractorEvent)>();
+            if (hand == XRHand.Primary)
+            {
+                foreach (var id in _interactorsNovaEventsIds)
+                {
+                    events.Add(GetInteractorNovaEvent(id, XRHand.Primary));
+                }
+            }
+            else
+            {
+                foreach (var id in _interactorsNovaEventsIds)
+                {
+                    events.Add(GetInteractorNovaEvent(id, XRHand.Secondary));
                 }
             }
             return events;

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Assets.Scripts.Core.Events;
+using Assets.Scripts.Core.Events.UI;
+using Nova;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,6 +59,114 @@ namespace Assets.Scripts.Core.XR
         private List<(int, Action<InputAction.CallbackContext>, XRInputType)> _events = new List<(int, Action<InputAction.CallbackContext>, XRInputType)>();
         private List<(int, UnityAction<BaseInteractionEventArgs>, XRInteractorType, XRInteractorEvent)> _interactorEvents = new List<(int, UnityAction<BaseInteractionEventArgs>, XRInteractorType, XRInteractorEvent)>();
         private List<(int, UnityAction<UIHoverEventArgs>, XRInteractorType, XRInteractorEvent)> _uiEvents = new List<(int, UnityAction<UIHoverEventArgs>, XRInteractorType, XRInteractorEvent)>();
+        private List<(int, UnityAction<NovaUIHoverEvent>, XRInteractorType, XRInteractorEvent)> _novaEvents = new List<(int, UnityAction<NovaUIHoverEvent>, XRInteractorType, XRInteractorEvent)>(); // Nova UI Events
+
+        private EventBinding<NovaUIHoverEvent> _onHoverBinding;
+        private EventBinding<NovaUISelectEvent> _onSelectBinding;
+
+        private UnityAction<NovaUIHoverEvent> _onHoverEnter;
+        private UnityAction<NovaUIHoverEvent> _onHoverExit;
+
+        private CoreBlock _blockHovered;
+
+        private XRRayInteractor _rayInteractor;
+
+        private void Awake()
+        {
+            _rayInteractor = RayInteractor as XRRayInteractor;
+
+            _onHoverBinding = new EventBinding<NovaUIHoverEvent>(DetectHoverEvent);
+
+            EventBus<NovaUIHoverEvent>.Register(_onHoverBinding);
+        }
+
+        private void Update()
+        {
+            // Detect hover event for Nova UI
+            NovaUIHoverEvent hoverEvent = DetectHover();
+            if (hoverEvent != null)
+            {
+                EventBus<NovaUIHoverEvent>.Raise(hoverEvent);
+            }
+            DetectSelect();
+        }
+
+        #region Nova Events
+
+        /// <summary>
+        /// Detect the hover event for Nova UI
+        /// </summary>
+        /// <returns></returns>
+        private NovaUIHoverEvent DetectHover()
+        {
+            if(_rayInteractor.IsOverUIGameObject()) return null;
+
+            if (_rayInteractor.TryGetCurrent3DRaycastHit(out var raycast))
+            {
+                CoreBlock block = raycast.collider.GetComponent<CoreBlock>();
+                if (block != null)
+                {
+                    NovaUIHoverEvent hoverEventEnter = new NovaUIHoverEvent();
+                    hoverEventEnter.Element = block;
+                    hoverEventEnter.Interactor = RayInteractor;
+                    hoverEventEnter.IsHovering = true;
+
+                    if(_blockHovered != block)
+                    {
+                        NovaUIHoverEvent hoverEventExit = new NovaUIHoverEvent();
+                        hoverEventExit.Element = _blockHovered;
+                        hoverEventExit.Interactor = RayInteractor;
+                        hoverEventExit.IsHovering = false;
+
+                        _blockHovered = block;
+
+                        EventBus<NovaUIHoverEvent>.Raise(hoverEventExit);
+                    }
+
+                    return hoverEventEnter;
+                }
+            }
+            
+            return null;
+        }
+
+        /// <summary>
+        /// Fire the hover event for Nova UI
+        /// </summary>
+        /// <param name="hoverEvent"></param>
+        private void DetectHoverEvent(NovaUIHoverEvent hoverEvent)
+        {
+            if (hoverEvent.IsHovering)
+            {
+                _onHoverEnter?.Invoke(hoverEvent);
+            }
+            else
+            {
+                _onHoverExit?.Invoke(hoverEvent);
+            }
+        }
+
+        /// <summary>
+        /// Detect the select event for Nova UI
+        /// </summary>
+        private void DetectSelect()
+        {
+            InputActionReference trigger = GetRefFromInputType(XRInputType.Trigger);
+            if (trigger.action.triggered)
+            {
+                if (_blockHovered != null)
+                {
+                    NovaUISelectEvent selectEvent = new NovaUISelectEvent();
+                    selectEvent.Element = _blockHovered;
+                    selectEvent.Interactor = RayInteractor;
+
+                    EventBus<NovaUISelectEvent>.Raise(selectEvent);
+                }
+            }
+        }
+
+        #endregion
+
 
         #region Events
 
@@ -134,6 +245,13 @@ namespace Assets.Scripts.Core.XR
             return id;
         }
 
+        /// <summary>
+        /// Register the interactor ui event with the given callback, interactor type and interactor event
+        /// </summary>
+        /// <param name="callback"></param>
+        /// <param name="interactorEvent"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public int RegisterUI(UnityAction<UIHoverEventArgs> callback, XRInteractorEvent interactorEvent)
         {
             int id = Guid.NewGuid().GetHashCode();
@@ -148,6 +266,33 @@ namespace Assets.Scripts.Core.XR
                     break;
                 case XRInteractorEvent.HoverExit:
                     rayInteractor.uiHoverExited.AddListener(callback);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(interactorEvent), interactorEvent, null);
+            }
+
+            return id;
+        }
+
+        /// <summary>
+        /// Register the interactor nova event with the given callback, interactor type and interactor event
+        /// </summary>
+        /// <param name="callback"></param>
+        /// <param name="interactorEvent"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public int RegisterNova(UnityAction<NovaUIHoverEvent> callback, XRInteractorEvent interactorEvent)
+        {
+            int id = Guid.NewGuid().GetHashCode();
+            _novaEvents.Add((id, callback, XRInteractorType.Ray, interactorEvent));
+
+            switch (interactorEvent)
+            {
+                case XRInteractorEvent.HoverEnter:
+                    _onHoverEnter += callback;
+                    break;
+                case XRInteractorEvent.HoverExit:
+                    _onHoverExit += callback;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(interactorEvent), interactorEvent, null);
@@ -189,7 +334,7 @@ namespace Assets.Scripts.Core.XR
         }
 
         /// <summary>
-        /// Unregister the interactor event with the given id
+        /// Unregister the interactor ui event with the given id
         /// </summary>
         /// <param name="id"></param>
         /// <param name="interactorEvent"></param>
@@ -214,6 +359,30 @@ namespace Assets.Scripts.Core.XR
         }
 
         /// <summary>
+        /// Unregister the interactor nova event with the given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="interactorEvent"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public void UnregisterNova(int id, XRInteractorEvent interactorEvent)
+        {
+            var (index, _, _, _) = _novaEvents.Find(e => e.Item1 == id);
+            _novaEvents.RemoveAt(index);
+
+            switch (interactorEvent)
+            {
+                case XRInteractorEvent.HoverEnter:
+                    _onHoverEnter -= _novaEvents[index].Item2;
+                    break;
+                case XRInteractorEvent.HoverExit:
+                    _onHoverExit -= _novaEvents[index].Item2;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(interactorEvent), interactorEvent, null);
+            }
+        }
+
+        /// <summary>
         /// Get the interactor event with the given id
         /// </summary>
         /// <param name="id"></param>
@@ -231,6 +400,16 @@ namespace Assets.Scripts.Core.XR
         public (int, UnityAction<UIHoverEventArgs>, XRInteractorType, XRInteractorEvent) GetUIEvent(int id)
         {
             return _uiEvents.Find(e => e.Item1 == id);
+        }
+
+        /// <summary>
+        /// Get the interactor nova event with the given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public (int, UnityAction<NovaUIHoverEvent>, XRInteractorType, XRInteractorEvent) GetNovaEvent(int id)
+        {
+            return _novaEvents.Find(e => e.Item1 == id);
         }
 
         #endregion

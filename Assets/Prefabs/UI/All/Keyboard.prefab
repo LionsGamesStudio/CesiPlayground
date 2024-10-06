@@ -24,9 +24,13 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11487846, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11499414, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
       propertyPath: m_Pivot.x
@@ -110,7 +114,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 275186248912405585, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097082730694957451, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
+      propertyPath: m_OnFocusSelectAll
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097082730694957451, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
+      propertyPath: m_ResetOnDeActivation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148444753226197421, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
+      propertyPath: m_fontColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148444753226197421, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 3289650
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187996451069544821, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696474692589808570, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
+      propertyPath: m_fontColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696474692589808570, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 3289650
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
