@@ -1,9 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Assets.Scripts.Core.Players;
+using Assets.Scripts.Process.Storing.Converters;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Process.Storing.Storage
 {
@@ -13,7 +16,7 @@ namespace Assets.Scripts.Process.Storing.Storage
         {
             Converters =
             {
-
+                new PlayerDataConverter()
             },
             Formatting = Newtonsoft.Json.Formatting.Indented,
         };
@@ -43,8 +46,9 @@ namespace Assets.Scripts.Process.Storing.Storage
 
         public T GetFromString<T>(string text) where T : class
         {
-            if(string.IsNullOrEmpty(text)) 
+            if (string.IsNullOrEmpty(text)) 
                 return default(T);
+
 
             T objectFromJson = JsonConvert.DeserializeObject<T>(text, settings);
 

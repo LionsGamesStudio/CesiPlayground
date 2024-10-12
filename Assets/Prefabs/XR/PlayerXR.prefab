@@ -304,6 +304,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3331454506889649678, guid: a127394a868f59043bcc24e1f56a5e6b, type: 3}
+      propertyPath: _storageManager
+      value: 
+      objectReference: {fileID: 9095550834303483359}
     - target: {fileID: 6542305089361733367, guid: a127394a868f59043bcc24e1f56a5e6b, type: 3}
       propertyPath: m_Name
       value: APIManager
@@ -689,12 +693,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!4 &6760406154852910459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7670437731660363691, guid: 13e16e3c1791f8544b4bbeb0582f3c29, type: 3}

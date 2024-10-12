@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Core.Events;
 using Assets.Scripts.Core.Events.API;
+using Assets.Scripts.Core.Storing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace Assets.Scripts.Core.API
 {
     public class APIManager : MonoBehaviour
     {
+        [SerializeField] private StorageManager _storageManager;
+
         [SerializeField] private List<APIRequester> requests = new List<APIRequester>();
 
         private EventBinding<OnAPIRequestEvent> _onAPIRequestBinding;
@@ -29,6 +32,7 @@ namespace Assets.Scripts.Core.API
         private void OnAPIRequest(OnAPIRequestEvent e)
         {
             APIRequester requester = requests.Find(r => r.GetType().Name == e.RequesterName);
+            requester.SetStorageManager(_storageManager);
             if (requester != null)
             {
                 var method = requester.GetType().GetMethod(e.Method);

@@ -12,8 +12,6 @@ namespace Assets.Scripts.Core.Players
     {
         public string PlayerId;
         public string PlayerName;
-
-        [JsonIgnore]
         public string PlayerPassword;
     }
 }

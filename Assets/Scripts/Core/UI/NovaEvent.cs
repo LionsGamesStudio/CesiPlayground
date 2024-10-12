@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 namespace Assets.Scripts.Core.UI
 {
-    [Serializable] public class NovaEvent : UnityEvent
+    [Serializable] 
+    public class NovaEvent : UnityEvent
     {
         /// <summary>
         /// Lists all the methods subscribed to the event

@@ -28,13 +28,6 @@ namespace Assets.Scripts.UI.MenuUI
             {
                 Debug.LogError("LoginUI requires a NovaButton component to function.");
             }
-
-            bool hasRegisterLogIn = false;
-
-            foreach (var item in _button.OnSelect.ListSubscribers())
-            {
-                Debug.Log(item);
-            }
         }
 
         /// <summary>

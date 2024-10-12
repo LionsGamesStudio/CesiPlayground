@@ -32,6 +32,8 @@ namespace Assets.Scripts.UI.MenuUI
             apiRequestEvent.Data.Set("pseudo", newName);
             apiRequestEvent.Data.Set("password", password);
 
+            Debug.Log("Registering player " + newName);
+
             EventBus<OnAPIRequestEvent>.Raise(apiRequestEvent);
         }
     }

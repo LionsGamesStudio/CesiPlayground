@@ -114,18 +114,15 @@ namespace Assets.Scripts.Core.Players
         /// <param name="e"></param>
         private void OnAPIResponse(OnAPIResponseEvent e)
         {
-            Debug.Log("Call API Response");
             if (e.RequestType == APIRequestType.GET)
             {
                 if (e.URL.Contains("players"))
                 {
-                    List<PlayerData> players = StorageManager.GetFromString<List<PlayerData>>(e.JSON);
-                    Debug.Log("Players: " + players.Count);
-                    Debug.Log(e.JSON);
+                    PlayerData player = StorageManager.GetFromString<PlayerData>(e.JSON);
 
-                    if (players != null && players.Count == 1)
+                    if (player != null)
                     {
-                        PlayerData = players[0];
+                        PlayerData = player;
                         ChangeName(PlayerData.PlayerName);
                     }
                 }

@@ -34,6 +34,11 @@ namespace Assets.Scripts.Core.API
                 _salt = GenerateSalt();
         }
 
+        public void SetStorageManager(StorageManager storageManager)
+        {
+            _storageManager = storageManager;
+        }
+
         /// <summary>
         /// Generate a salt
         /// </summary>

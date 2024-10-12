@@ -84,30 +84,25 @@ namespace Assets.Scripts.Process.API
             string pseudo = data.Get<string>("pseudo");
             string password = data.Get<string>("password");
 
-            Debug.Log(pseudo + " " + password);
-
             if (pseudo == null || password == null)
             {
                 return;
             }
 
-            //password = HashPassword(password, _salt);
-
-            Debug.Log(password);
+            password = HashPassword(password, _salt);
 
             string url = "/" + _tableName + "/" + pseudo;
 
             string response = await Get(url);
 
             // No answer
-            if (response == null)
+            if (response == null || response == "[]")
             {
                 return;
             }
 
-            // TODO : Check if the password is correct
-
             List<PlayerData> datas = _storageManager.GetFromString<List<PlayerData>>(response);
+
             string jsonPlayer = "";
             foreach (PlayerData item in datas)
             {
@@ -145,7 +140,9 @@ namespace Assets.Scripts.Process.API
             // Check if the pseudo is already taken
             string urlCheck = "/" + _tableName + "/" + pseudo;
 
+
             string responseCheck = await Get(urlCheck);
+
 
             // No answer
             if (responseCheck == null)
@@ -162,11 +159,11 @@ namespace Assets.Scripts.Process.API
             // Hash the password
             password = HashPassword(password, _salt);
 
+
             // Create the player
             string json = "{\"pseudo\":\"" + pseudo + "\",\"password\":\"" + password + "\"}";
             string url = "/" + _tableName;
 
-            Debug.Log(url);
 
             string response = await Post(url, json);
 
