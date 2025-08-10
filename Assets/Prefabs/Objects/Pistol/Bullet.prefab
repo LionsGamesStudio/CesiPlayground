@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 130009490090696813}
   - component: {fileID: 8050255584632972529}
   - component: {fileID: -285581553066924812}
-  - component: {fileID: 336869315229910375}
+  - component: {fileID: 1508088864157027927}
+  - component: {fileID: 3891376588612024219}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -133,8 +134,8 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
---- !u!114 &336869315229910375
+  m_CollisionDetection: 1
+--- !u!114 &1508088864157027927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,6 +144,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6792232888774348060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1482f670ecfbe6409d6869a655e2850, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ceee3daa27439f4282be227562291fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3891376588612024219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792232888774348060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dda3cb3538ac546a296ca2be47fbd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactEffectPrefab: {fileID: 4882679678693066899, guid: 170128f7e97d1c2438429b9795b2f4b1, type: 3}

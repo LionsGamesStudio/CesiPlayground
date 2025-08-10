@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Core.Storing
+namespace CesiPlayground.Core.Storing
 {
     public abstract class IStorageFactory : ScriptableObject
     {

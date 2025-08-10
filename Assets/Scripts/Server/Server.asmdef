@@ -1,0 +1,29 @@
+{
+    "name": "Server",
+    "rootNamespace": "CesiPlayground.Server",
+    "references": [
+        "GUID:f29cfb9664df1444aa76bcbd850b19db",
+        "GUID:2df9ba4bd80deb04a9ead8e410d25a50"
+    ],
+    "includePlatforms": [
+        "Editor",
+        "LinuxStandalone64Server",
+        "macOSStandaloneServer",
+        "WindowsStandalone32Server",
+        "WindowsStandalone64Server"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "Select...",
+            "expression": "",
+            "define": "UNITY_SERVER"
+        }
+    ],
+    "noEngineReferences": false
+}

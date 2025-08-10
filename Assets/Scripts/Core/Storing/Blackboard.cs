@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Core.Storing
+namespace CesiPlayground.Core.Storing
 {
     public class Blackboard
     {

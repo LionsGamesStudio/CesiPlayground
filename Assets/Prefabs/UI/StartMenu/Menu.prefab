@@ -3125,7 +3125,7 @@ GameObject:
   - component: {fileID: 7301048795308924225}
   - component: {fileID: 2402361955728675780}
   - component: {fileID: 32897165245845014}
-  - component: {fileID: 6046659486641603742}
+  - component: {fileID: 9021137271301495606}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -3350,7 +3350,7 @@ MonoBehaviour:
     EdgeRadius:
       Raw: 0
       Type: 0
---- !u!114 &6046659486641603742
+--- !u!114 &9021137271301495606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3359,10 +3359,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7251697861796944062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0635bb2a971e2e548a5c7a5658defeee, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f6521bc22166cf438cdf7957db4f181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tabs:
+  tabs:
   - {fileID: 6540480390001240304}
   - {fileID: 4115497122729596023}
   - {fileID: 5475296728723189566}
@@ -4625,7 +4625,7 @@ PrefabInstance:
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6046659486641603742}
+      objectReference: {fileID: 9021137271301495606}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -4636,7 +4636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TabsManager, Assembly-CSharp
+      value: CesiPlayground.Client.UI.TabsManager, Client
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -4823,7 +4823,7 @@ PrefabInstance:
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6046659486641603742}
+      objectReference: {fileID: 9021137271301495606}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -4834,7 +4834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TabsManager, Assembly-CSharp
+      value: CesiPlayground.Client.UI.TabsManager, Client
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -4996,18 +4996,18 @@ PrefabInstance:
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7891889881784732785}
+      objectReference: {fileID: 8460750514578671028}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ValidateName
+      value: RegisterAccount
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Assets.Scripts.UI.MenuUI.RegisterUI, Assembly-CSharp
+      value: CesiPlayground.Client.UI.MenuUI.RegisterUI, Client
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5091,7 +5091,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8106021383985090423, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7891889881784732785}
+      addedObject: {fileID: 8460750514578671028}
   m_SourcePrefab: {fileID: 100100000, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
 --- !u!4 &7062278591612250815 stripped
 Transform:
@@ -5103,7 +5103,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8106021383985090423, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
   m_PrefabInstance: {fileID: 2225341959186791983}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7891889881784732785
+--- !u!114 &8460750514578671028
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5112,11 +5112,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7970350138876981592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e36d2c846299b8647a264e49f5c34b74, type: 3}
+  m_Script: {fileID: 11500000, guid: f916644415c0f634da8070e45bc93e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextBlockPseudo: {fileID: 2852506630585536906}
-  TextBlockPassword: {fileID: 6363727404208063256}
+  _textBlockPseudo: {fileID: 2852506630585536906}
+  _textBlockPassword: {fileID: 6363727404208063256}
+  _apiService: {fileID: 11400000, guid: 68ec324e493ad8e498c3434cdfc20c51, type: 2}
 --- !u!1001 &2227897714651811126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5196,7 +5197,7 @@ PrefabInstance:
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2012283589661703904}
+      objectReference: {fileID: 5624965378108978724}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -5207,7 +5208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Assets.Scripts.UI.MenuUI.LoginUI, Cesiplayground.UI
+      value: CesiPlayground.Client.UI.MenuUI.LoginUI, Client
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5287,7 +5288,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8106021383985090423, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2012283589661703904}
+      addedObject: {fileID: 5624965378108978724}
   m_SourcePrefab: {fileID: 100100000, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
 --- !u!4 &7064834330413275558 stripped
 Transform:
@@ -5299,7 +5300,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8106021383985090423, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
   m_PrefabInstance: {fileID: 2227897714651811126}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2012283589661703904
+--- !u!114 &5624965378108978724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5308,7 +5309,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7968357212586181185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3679ddd817fdd174ab07635074b8c263, type: 3}
+  m_Script: {fileID: 11500000, guid: cd987f9d1022df041b6334f727a56158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _textBlockPseudo: {fileID: 2896003484842673013}
@@ -5971,7 +5972,7 @@ PrefabInstance:
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6046659486641603742}
+      objectReference: {fileID: 9021137271301495606}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -5982,7 +5983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TabsManager, Assembly-CSharp
+      value: CesiPlayground.Client.UI.TabsManager, Client
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -6342,7 +6343,7 @@ PrefabInstance:
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6046659486641603742}
+      objectReference: {fileID: 9021137271301495606}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -6353,7 +6354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TabsManager, Assembly-CSharp
+      value: CesiPlayground.Client.UI.TabsManager, Client
       objectReference: {fileID: 0}
     - target: {fileID: 4548921383028577128, guid: fde2304b6d5e41246a18c5283e53012f, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument

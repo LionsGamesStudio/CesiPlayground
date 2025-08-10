@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 7531284343824757866}
   - component: {fileID: 8919558740285577242}
   - component: {fileID: 5784136524941561344}
-  - component: {fileID: -2950626404386593356}
+  - component: {fileID: 6608026941286570753}
   m_Layer: 5
   m_Name: RowScore
   m_TagString: Untagged
@@ -508,7 +508,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &-2950626404386593356
+--- !u!114 &6608026941286570753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6546224240576360583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca60e99735d01704cbc86d77d1a2a7e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 962480ce26ee68047b2f6e44feacf502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Position: {fileID: 7634201714732453606}

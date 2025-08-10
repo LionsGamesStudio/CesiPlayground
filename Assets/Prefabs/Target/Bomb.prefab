@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 361844982140038192}
-  - component: {fileID: 7493269972551288565}
   - component: {fileID: 7042251386586705828}
-  - component: {fileID: 4007051020998690135}
   - component: {fileID: 2238470765271242653}
-  m_Layer: 8
+  - component: {fileID: 3009325014385899400}
+  - component: {fileID: 4032060282348423613}
+  m_Layer: 7
   m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,23 +36,6 @@ Transform:
   - {fileID: 1738226066771408871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7493269972551288565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501340564559270100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f858739bac23d745a7455b051f98172, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game: {fileID: 0}
-  score: -20
-  tagHitting:
-  - Bullet
-  effectOnDestroy: {fileID: 8024663154253787984, guid: 1e5453af92fbf3c4b8ff937913c0a264, type: 3}
 --- !u!65 &7042251386586705828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74,19 +57,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.89, y: 1.07, z: 0.93}
   m_Center: {x: 0.07, y: 0.03, z: 0}
---- !u!114 &4007051020998690135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501340564559270100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e47cef43bbe49f40bc405b0cbd34856, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destructionSound: {fileID: 8300000, guid: 0af20d5215ea0ec4a895d45419237696, type: 3}
 --- !u!82 &2238470765271242653
 AudioSource:
   m_ObjectHideFlags: 0
@@ -183,6 +153,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3009325014385899400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501340564559270100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ceee3daa27439f4282be227562291fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4032060282348423613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501340564559270100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261a36c997320e64bac04ca2eafef763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectOnDestroy: {fileID: 8024663154253787984, guid: 1e5453af92fbf3c4b8ff937913c0a264, type: 3}
 --- !u!1001 &2275956189634662412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -231,9 +226,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2100681930374150874, guid: d5eceb68923b143448e972993f98771c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1018664272722485354, guid: d5eceb68923b143448e972993f98771c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 359312179909449575, guid: d5eceb68923b143448e972993f98771c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d5eceb68923b143448e972993f98771c, type: 3}
       propertyPath: m_Name
       value: bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5eceb68923b143448e972993f98771c, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

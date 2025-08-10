@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1134277969321034451}
   - component: {fileID: 2056265539045129482}
-  - component: {fileID: 1975789655689960349}
+  - component: {fileID: 637199598111253302}
   m_Layer: 0
   m_Name: BaseGate
   m_TagString: Untagged
@@ -56,7 +56,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1975789655689960349
+--- !u!114 &637199598111253302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,10 +65,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6741215061560627837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1e5f9fe9c3710b449492d141ed77950, type: 3}
+  m_Script: {fileID: 11500000, guid: 97d6836a51c64ae499c8cb3f80c348e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _exit: {fileID: 0}
-  _isLocked: 0
-  _tags: []
+  gateName: 

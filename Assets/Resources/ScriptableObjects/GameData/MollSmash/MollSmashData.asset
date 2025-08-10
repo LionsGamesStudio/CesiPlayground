@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1bb917449a186448995743b3b22ee0, type: 3}
+  m_Name: MollSmashData
+  m_EditorClassIdentifier: 
+  GameId: MollSmash
+  GameName: Moll Smash
+  GameDescription: 
+  GameImage: {fileID: 0}
+  GamePrefab: {fileID: 8247761859016245067, guid: b6504f9ba8a21dc4ab84834f6813c70a, type: 3}
