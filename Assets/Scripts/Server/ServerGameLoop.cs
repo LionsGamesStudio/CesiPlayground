@@ -11,6 +11,7 @@ using CesiPlayground.Server.AI;
 using CesiPlayground.Server.Gates;
 using CesiPlayground.Shared.Data.Games;
 using CesiPlayground.Shared.Data.HubLayoutData;
+using CesiPlayground.Core.Config;
 
 namespace CesiPlayground.Server
 {
@@ -29,7 +30,18 @@ namespace CesiPlayground.Server
 
         private void Awake()
         {
-            // --- 1. Register ScriptableObject services first ---
+            // --- 1. Create the config service FIRST ---
+            var configService = new EnvironmentConfigService();
+
+            // --- 2. Register AND INITIALIZE ScriptableObject services ---
+            if (serverApiService != null)
+            {
+                string apiUrl = configService.GetValue("serverApiUrl", "http://api/api/");
+                serverApiService.Initialize(apiUrl);
+                ServiceLocator.Register(serverApiService);
+            }
+
+            // --- 3. Register ScriptableObject services first ---
             if (serverApiService != null) ServiceLocator.Register(serverApiService);
             else Debug.LogError("ServerAPIService is not assigned in the inspector!");
 

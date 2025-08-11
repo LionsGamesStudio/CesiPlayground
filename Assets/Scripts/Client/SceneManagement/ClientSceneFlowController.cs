@@ -64,13 +64,13 @@ namespace CesiPlayground.Client.SceneManagement
         {
             yield return _fader.FadeOut(0.5f);
 
-            if (e.SceneToUnload != null)
+            if (e.SceneToUnload != null && e.SceneToUnload.IsLoaded)
             {
                 _scenesManager.UnloadScene(e.SceneToUnload);
                 yield return new WaitUntil(() => !e.SceneToUnload.IsLoaded);
             }
 
-            if (e.SceneToLoad != null)
+            if (e.SceneToLoad != null && !e.SceneToLoad.IsLoaded)
             {
                 _scenesManager.LoadScene(e.SceneToLoad);
                 yield return new WaitUntil(() => e.SceneToLoad.IsLoaded);
@@ -79,14 +79,15 @@ namespace CesiPlayground.Client.SceneManagement
 
             // Wait for one frame to allow the new scene's physics to initialize
             // before we try to find objects or teleport the player.
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
 
             GateTrigger destinationGate = FindDestinationGate(e.DestinationGateName);
-            if (destinationGate != null && PlayerRigController.HasInstance)
-            {
-                PlayerRigController.TryGetInstance().TeleportTo(destinationGate.transform);
+            PlayerRigController playerRig = PlayerRigController.TryGetInstance();
 
-                // Notify the server that we have arrived at our new authoritative position.
+            if (destinationGate != null && playerRig != null)
+            {
+                yield return playerRig.TeleportTo(destinationGate.transform);
+
                 var networkManager = ServiceLocator.Get<ClientNetworkManager>();
                 networkManager?.Send(new ClientReadyInSceneMessage
                 {

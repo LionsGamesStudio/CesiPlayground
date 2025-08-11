@@ -4,6 +4,7 @@ using CesiPlayground.Client.Players;
 using CesiPlayground.Client.Addressables;
 using CesiPlayground.Core;
 using CesiPlayground.Client.UI;
+using CesiPlayground.Core.Config;
 
 namespace CesiPlayground.Client
 {
@@ -22,7 +23,10 @@ namespace CesiPlayground.Client
 
         private void Awake()
         {
-            // --- 1. Instantiate Service Prefabs ---
+            // --- 1. Create the config service FIRST ---
+            var configService = new EnvironmentConfigService();
+
+            // --- 2. Instantiate Service Prefabs ---
             if (faderPrefab != null)
             {
                 // We only instantiate it if an instance doesn't already exist from a previous scene load.
@@ -46,7 +50,17 @@ namespace CesiPlayground.Client
                 Debug.LogError("ClientAPIService asset is not assigned in the ClientServiceInitializer!");
             }
 
-            // --- 3. Create and Register Plain C# Services ---
+            // --- 3. Register AND INITIALIZE ScriptableObject Services ---
+            if (clientApiService != null)
+            {
+                // Get the URL from the config and give it to the service.
+                string apiUrl = configService.GetValue("clientApiUrl", "http://localhost:8080/api/");
+                clientApiService.Initialize(apiUrl);
+                
+                Core.ServiceLocator.Register(clientApiService);
+            }
+
+            // --- 4. Create and Register Plain C# Services ---
             new AddressablesManager();
             new PlayerDataService();
         }

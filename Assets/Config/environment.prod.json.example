@@ -1,0 +1,5 @@
+{
+  "clientApiUrl": "https://VOTRE_API_DE_PRODUCTION.com/api/",
+  "gameServerUrl": "wss://VOTRE_SERVEUR_DE_JEU_PROD.com/Game",
+  "serverApiUrl": "http://api/api/"
+}

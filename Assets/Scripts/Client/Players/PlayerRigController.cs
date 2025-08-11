@@ -5,6 +5,7 @@ using CesiPlayground.Shared.Events.Data;
 using CesiPlayground.Client.Network;
 using CesiPlayground.Shared.Data.Players;
 using TMPro;
+using System.Collections;
 
 namespace CesiPlayground.Client.Players
 {
@@ -35,9 +36,9 @@ namespace CesiPlayground.Client.Players
         {
             base.Awake();
             if (this.enabled == false) return;
-            
+
             DontDestroyOnLoad(this.gameObject);
-            
+
             // Start in "Menu Mode": networking is disabled.
             SetNetworkingActive(false);
             if (playerNameTag != null) playerNameTag.gameObject.SetActive(false);
@@ -52,21 +53,21 @@ namespace CesiPlayground.Client.Players
         {
             GameEventSystem.Client.Unregister<PlayerDataLoadedEvent>(OnPlayerDataLoaded);
         }
-        
+
         private void OnPlayerDataLoaded(PlayerDataLoadedEvent e)
         {
             _playerData = e.Data;
             gameObject.name = $"PlayerXR - {_playerData.PlayerName}";
-            
+
             if (playerNameTag != null)
             {
                 playerNameTag.text = _playerData.PlayerName;
                 playerNameTag.gameObject.SetActive(true);
             }
-            
+
             SetNetworkingActive(true);
         }
-        
+
         public void SetNetworkingActive(bool isActive)
         {
             if (networkedPlayer != null)
@@ -79,33 +80,34 @@ namespace CesiPlayground.Client.Players
             }
         }
 
-        public void TeleportTo(Transform target)
+        public Coroutine TeleportTo(Transform target)
         {
             if (target == null || xrOriginObject == null || characterController == null)
             {
                 Debug.LogError("Teleport failed: A reference is missing in PlayerRigController.", this);
-                return;
+                return null;
             }
 
-            // 1. Set the networked player to not send updates during teleport.
+            return StartCoroutine(TeleportRoutine(target));
+        }
+        
+        private IEnumerator TeleportRoutine(Transform target)
+        {
             SetNetworkingActive(false);
-
-            // 2. Disable the CharacterController to allow for direct transform manipulation.
             characterController.enabled = false;
 
-            // 3. Move the parent container AND the child rig.
-            //    This ensures the entire prefab moves as one unit.
             this.transform.position = target.position;
             this.transform.rotation = target.rotation;
             xrOriginObject.transform.localPosition = Vector3.zero;
             xrOriginObject.transform.localRotation = Quaternion.identity;
+            
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate(); // Use a 2nd WaitForFixedUpdate for safety
 
-            // 4. Re-enable the CharacterController. This forces it to re-evaluate its
-            //    surroundings at the new position and detect the ground.
             characterController.enabled = true;
 
-            // 5. Re-enable networking to allow transform updates again.
             SetNetworkingActive(true);
         }
+
     }
 }

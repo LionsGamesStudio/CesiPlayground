@@ -1,0 +1,5 @@
+{
+  "clientApiUrl": "http://localhost:8080/api/",
+  "gameServerUrl": "ws://127.0.0.1:9001/Game",
+  "serverApiUrl": "http://api/api/"
+}
